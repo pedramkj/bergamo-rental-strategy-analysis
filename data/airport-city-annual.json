@@ -1,0 +1,65 @@
+[
+  {
+    "year": 2019,
+    "airport_passengers": 13857257,
+    "city_arrivals": 414871,
+    "city_guest_nights": 791353,
+    "airport_source": "https://assaeroporti.com/statistiche/?month=12&selectedYear=2019",
+    "city_source": "regional reconciled extract",
+    "retrieved_on": "2026-10-13"
+  },
+  {
+    "year": 2020,
+    "airport_passengers": 3833063,
+    "city_arrivals": 101948,
+    "city_guest_nights": 226903,
+    "airport_source": "https://assaeroporti.com/statistiche/?month=12&selectedYear=2020",
+    "city_source": "regional reconciled extract",
+    "retrieved_on": "2026-10-13"
+  },
+  {
+    "year": 2021,
+    "airport_passengers": 6467296,
+    "city_arrivals": 197642,
+    "city_guest_nights": 409696,
+    "airport_source": "https://assaeroporti.com/statistiche/?month=12&selectedYear=2021",
+    "city_source": "regional reconciled extract",
+    "retrieved_on": "2026-10-13"
+  },
+  {
+    "year": 2022,
+    "airport_passengers": 13155806,
+    "city_arrivals": 368024,
+    "city_guest_nights": 734334,
+    "airport_source": "https://assaeroporti.com/statistiche/?month=12&selectedYear=2022",
+    "city_source": "regional reconciled extract",
+    "retrieved_on": "2026-10-13"
+  },
+  {
+    "year": 2023,
+    "airport_passengers": 15974451,
+    "city_arrivals": 513659,
+    "city_guest_nights": 1017202,
+    "airport_source": "https://assaeroporti.com/statistiche/?month=12&selectedYear=2023",
+    "city_source": "regional reconciled extract",
+    "retrieved_on": "2026-10-13"
+  },
+  {
+    "year": 2024,
+    "airport_passengers": 17353573,
+    "city_arrivals": 601824,
+    "city_guest_nights": 1208189,
+    "airport_source": "https://assaeroporti.com/statistiche/?month=12&selectedYear=2024",
+    "city_source": "regional reconciled extract",
+    "retrieved_on": "2026-10-13"
+  },
+  {
+    "year": 2025,
+    "airport_passengers": 16937976,
+    "city_arrivals": 666254,
+    "city_guest_nights": 1359923,
+    "airport_source": "https://assaeroporti.com/statistiche/?month=12&selectedYear=2025",
+    "city_source": "Provincia report 14 May 2026",
+    "retrieved_on": "2026-10-13"
+  }
+]

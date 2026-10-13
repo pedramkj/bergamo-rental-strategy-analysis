@@ -10,11 +10,12 @@ Python 3.10 or newer; no external dependencies for the core analysis.
 
 ```sh
 python analysis.py
+python airport_analysis.py
 ```
 
 The script validates 72 monthly observations against six annual controls, reconstructs seasonal allocations, calculates both strategies, checks ceiling break-even requirements and generates `results/analysis.json`. It runs entirely offline using the frozen snapshots. Assertions fail on missing controls or changed arithmetic. It does not download current listings.
 
-To rebuild the illustrated Word report, install `requirements-report.txt` and run `build_report.py` from this repository directory. The report is written to `report/`. Matplotlib generates six figures with titles, units and source notes in their document captions.
+To rebuild the illustrated Word report, install `requirements-report.txt` and run `build_report.py` from this repository directory. The report is written to `report/`. Matplotlib generates eight figures with titles, units and source notes in their document captions.
 
 ## Findings and assumptions
 - City guest nights rose from 791,353 in 2019 to 1,208,189 in the 2024 regional extract. The 2025 local report gives 1,359,923; this is a different release and no validated 2025 monthly series is included.
@@ -51,3 +52,18 @@ Tourism peaks do not imply full occupancy. Blocked platform calendars are not ve
 `report/`: generated deliverables, included in the downloadable local package.
 
 Conclusion: a credible market opportunity with conditional competitiveness; no proven general advantage for converting homes across Bergamo.
+
+## Complete v03 report and publication assets
+The two previous report versions were compared. The v02 financial model and limitations were retained, duplicates removed, and the airport comparison plus a dedicated methodology/challenges chapter added. Eight chapters now include a separate contents page and a clickable author LinkedIn header on every report page.
+
+- `report/Bergamo_Rental_Strategies_Complete_EN_v03.pdf`: complete English report.
+- `report/Bergamo_Rental_Strategies_Complete_EN_v03.docx`: editable report.
+- `report/Bergamo_Report_Contents_EN.pdf`: separate contents (page numbers refer to v03).
+- `publication/Bergamo_LinkedIn_Carousel_EN_Final.pdf`: nine-page LinkedIn carousel.
+- `publication/LinkedIn_Caption_EN.txt`: 193-word caption, prepared for review, not posted.
+
+`airport_analysis.py` validates seven 2019–2025 annual airport totals against two Assaeroporti tables for each year and produces a city join, indexed growth and year-on-year changes. In 2025, passengers declined 2.4% while city arrivals grew 10.7% and guest nights grew 12.6%. This divergence prevents treating airport passengers as a direct reservation proxy. No causal airport-to-profit effect is estimated. Annual passenger movements are not unique local tourists.
+
+`data/airport-bgy-source-rows.json` contains only numeric Bergamo rows from Assaeroporti traffic tables, with source URLs. Both monthly December and cumulative January–December records are preserved for audit; the analysis uses cumulative passenger totals. The analyst-tabulated `airport-city-annual.json` joins these values to official city observations. City 2025 is from the 14 May 2026 Provincia release, rather than the regional series through 2024. Source rights remain with providers. No source page text, photographs or personal data are redistributed.
+
+The Word builder creates a live contents field. Refresh fields in Microsoft Word before PDF export to populate the contents and page numbers. Word or another compatible renderer is required for PDF output; the Python builder does not render PDFs itself. The carousel follows Pedram Kojouri's existing brand kit and uses editable chart/table objects. Its displayed index values round to two decimals; full calculations remain in the data and JSON output.

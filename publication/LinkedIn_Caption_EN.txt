@@ -1,0 +1,18 @@
+More tourists, more rental profit? I tested that assumption for Bergamo.
+
+City guest nights increased by 52.7% between 2019 and 2024. But demand growth alone does not tell a homeowner which rental strategy leaves more cash.
+
+For this Data Analytics case study, I reconciled 72 monthly tourism observations with annual controls, screened residential rental listings, and built a Python model comparing short-term and long-term net cash income. I also joined BGY airport traffic with city tourism data for 2019–2025.
+
+The base scenario produced €6,545 annually for short-term renting and €6,732 for long-term renting. These are modelled outcomes, not observed city averages. A €187.50 difference is too small to support a confident ranking when price, bookings and expenses remain uncertain.
+
+An unexpected finding: BGY passenger traffic fell 2.4% in 2025 while city guest nights grew 12.6%. Airport activity cannot serve as a direct proxy for apartment reservations.
+
+The project includes source reconciliation, seasonal allocation, sensitivity analysis for both strategies, and preparation-cost thresholds. I documented the remaining evidence gaps alongside the results.
+
+Full report, data and reproducible code:
+https://github.com/pedramkj/bergamo-rental-strategy-analysis
+
+I’m interested in junior Data Analyst and Business Analyst opportunities in Italy.
+
+#DataAnalytics #BusinessAnalytics #Python #Bergamo
