@@ -1,0 +1,15 @@
+{
+  "booked_nights": 180,
+  "available_nights": 330,
+  "gross_nightly_eur": 115,
+  "host_fee": 0.155,
+  "tax": 0.21,
+  "cleaning_per_turnover": 30,
+  "stay_nights": 3,
+  "other_variable_per_night": 10,
+  "common_fixed": 1800,
+  "str_incremental_fixed": 1200,
+  "long_monthly": 900,
+  "paid_months": 12,
+  "recovery_years": 5
+}

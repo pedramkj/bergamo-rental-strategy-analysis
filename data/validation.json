@@ -1,0 +1,56 @@
+{
+  "access_date": "2026-10-13",
+  "geography": "Comune di Bergamo 016024",
+  "monthly_dataset": "mzxz-sz25",
+  "annual_dataset": "vyxt-7jdx",
+  "checks": [
+    {
+      "year": 2019,
+      "months": 12,
+      "arrivals": 414871,
+      "guest_nights": 791353,
+      "annual_reconciled": true
+    },
+    {
+      "year": 2020,
+      "months": 12,
+      "arrivals": 101948,
+      "guest_nights": 226903,
+      "annual_reconciled": true
+    },
+    {
+      "year": 2021,
+      "months": 12,
+      "arrivals": 197642,
+      "guest_nights": 409696,
+      "annual_reconciled": true
+    },
+    {
+      "year": 2022,
+      "months": 12,
+      "arrivals": 368024,
+      "guest_nights": 734334,
+      "annual_reconciled": true
+    },
+    {
+      "year": 2023,
+      "months": 12,
+      "arrivals": 513659,
+      "guest_nights": 1017202,
+      "annual_reconciled": true
+    },
+    {
+      "year": 2024,
+      "months": 12,
+      "arrivals": 601824,
+      "guest_nights": 1208189,
+      "annual_reconciled": true
+    }
+  ],
+  "difference_from_provincial_press_release_2024": {
+    "arrivals": -1,
+    "guest_nights": -4,
+    "October_guest_nights": 27
+  },
+  "2025_2026_monthly": "not present in this source; not imputed"
+}

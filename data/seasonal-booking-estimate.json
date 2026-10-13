@@ -1,0 +1,160 @@
+{
+  "reference_years": [
+    2019,
+    2022,
+    2023,
+    2024
+  ],
+  "method": "equal year average daily demand index applied to nonleap calendar then largest remainder allocation",
+  "annual_total_180": "assumption not empirically estimated annual mean",
+  "150_210": "sensitivity not confidence interval",
+  "134": "historical all-listing benchmark not comparable cohort",
+  "330_available": "assumed proportional to month length",
+  "2025": "calendar only, no observed 2025 monthly data",
+  "months": [
+    {
+      "month": 1,
+      "month_fa": "ژانویه",
+      "share": 0.051227867055715366,
+      "bookings": {
+        "134": 7,
+        "150": 8,
+        "180": 9,
+        "210": 11
+      },
+      "implied_occupancy_180": 0.32111436950146627
+    },
+    {
+      "month": 2,
+      "month_fa": "فوریه",
+      "share": 0.058683148407834805,
+      "bookings": {
+        "134": 8,
+        "150": 9,
+        "180": 11,
+        "210": 12
+      },
+      "implied_occupancy_180": 0.4345238095238095
+    },
+    {
+      "month": 3,
+      "month_fa": "مارس",
+      "share": 0.07440631211789198,
+      "bookings": {
+        "134": 10,
+        "150": 11,
+        "180": 13,
+        "210": 16
+      },
+      "implied_occupancy_180": 0.46383186705767354
+    },
+    {
+      "month": 4,
+      "month_fa": "آوریل",
+      "share": 0.09021055303828415,
+      "bookings": {
+        "134": 12,
+        "150": 13,
+        "180": 16,
+        "210": 19
+      },
+      "implied_occupancy_180": 0.5898989898989899
+    },
+    {
+      "month": 5,
+      "month_fa": "مه",
+      "share": 0.09707032711969221,
+      "bookings": {
+        "134": 13,
+        "150": 15,
+        "180": 17,
+        "210": 20
+      },
+      "implied_occupancy_180": 0.6065493646138808
+    },
+    {
+      "month": 6,
+      "month_fa": "ژوئن",
+      "share": 0.09257263179276615,
+      "bookings": {
+        "134": 13,
+        "150": 14,
+        "180": 17,
+        "210": 19
+      },
+      "implied_occupancy_180": 0.6267676767676768
+    },
+    {
+      "month": 7,
+      "month_fa": "ژوئیه",
+      "share": 0.09829014689578379,
+      "bookings": {
+        "134": 13,
+        "150": 15,
+        "180": 18,
+        "210": 21
+      },
+      "implied_occupancy_180": 0.6422287390029325
+    },
+    {
+      "month": 8,
+      "month_fa": "اوت",
+      "share": 0.09193341305296801,
+      "bookings": {
+        "134": 12,
+        "150": 14,
+        "180": 16,
+        "210": 19
+      },
+      "implied_occupancy_180": 0.570869990224829
+    },
+    {
+      "month": 9,
+      "month_fa": "سپتامبر",
+      "share": 0.0982687698815601,
+      "bookings": {
+        "134": 13,
+        "150": 15,
+        "180": 18,
+        "210": 21
+      },
+      "implied_occupancy_180": 0.6636363636363636
+    },
+    {
+      "month": 10,
+      "month_fa": "اکتبر",
+      "share": 0.10092759561509297,
+      "bookings": {
+        "134": 14,
+        "150": 15,
+        "180": 18,
+        "210": 21
+      },
+      "implied_occupancy_180": 0.6422287390029325
+    },
+    {
+      "month": 11,
+      "month_fa": "نوامبر",
+      "share": 0.07643111216593822,
+      "bookings": {
+        "134": 10,
+        "150": 11,
+        "180": 14,
+        "210": 16
+      },
+      "implied_occupancy_180": 0.5161616161616162
+    },
+    {
+      "month": 12,
+      "month_fa": "دسامبر",
+      "share": 0.06997812285647227,
+      "bookings": {
+        "134": 9,
+        "150": 10,
+        "180": 13,
+        "210": 15
+      },
+      "implied_occupancy_180": 0.46383186705767354
+    }
+  ]
+}

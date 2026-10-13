@@ -1,0 +1,177 @@
+{
+  "scope": "City of Bergamo; scenario incomes are not city averages",
+  "annual": {
+    "2019": {
+      "arrivals": 414871,
+      "guest_nights": 791353
+    },
+    "2020": {
+      "arrivals": 101948,
+      "guest_nights": 226903
+    },
+    "2021": {
+      "arrivals": 197642,
+      "guest_nights": 409696
+    },
+    "2022": {
+      "arrivals": 368024,
+      "guest_nights": 734334
+    },
+    "2023": {
+      "arrivals": 513659,
+      "guest_nights": 1017202
+    },
+    "2024": {
+      "arrivals": 601824,
+      "guest_nights": 1208189
+    }
+  },
+  "annual_controls_verified": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "seasonal_allocations": {
+    "134": [
+      7,
+      8,
+      10,
+      12,
+      13,
+      13,
+      13,
+      12,
+      13,
+      14,
+      10,
+      9
+    ],
+    "150": [
+      8,
+      9,
+      11,
+      13,
+      15,
+      14,
+      15,
+      14,
+      15,
+      15,
+      11,
+      10
+    ],
+    "180": [
+      9,
+      11,
+      13,
+      16,
+      17,
+      17,
+      18,
+      16,
+      18,
+      18,
+      14,
+      13
+    ],
+    "210": [
+      11,
+      12,
+      16,
+      19,
+      20,
+      19,
+      21,
+      19,
+      21,
+      21,
+      16,
+      15
+    ]
+  },
+  "str_net": 6544.500000000002,
+  "ltr_net": 6732.0,
+  "gap": -187.49999999999818,
+  "ltr_sensitivity": {
+    "700": 4836.0,
+    "800": 5784.0,
+    "900": 6732.0,
+    "1000": 7680.0,
+    "1100": 8628.0
+  },
+  "two_sided_gap": [
+    {
+      "str_incremental_fixed": 600,
+      "long_monthly": 800,
+      "gap": 1360.5000000000018
+    },
+    {
+      "str_incremental_fixed": 600,
+      "long_monthly": 900,
+      "gap": 412.5000000000018
+    },
+    {
+      "str_incremental_fixed": 600,
+      "long_monthly": 1000,
+      "gap": -535.4999999999982
+    },
+    {
+      "str_incremental_fixed": 1200,
+      "long_monthly": 800,
+      "gap": 760.5000000000018
+    },
+    {
+      "str_incremental_fixed": 1200,
+      "long_monthly": 900,
+      "gap": -187.49999999999818
+    },
+    {
+      "str_incremental_fixed": 1200,
+      "long_monthly": 1000,
+      "gap": -1135.4999999999982
+    },
+    {
+      "str_incremental_fixed": 1800,
+      "long_monthly": 800,
+      "gap": 160.50000000000182
+    },
+    {
+      "str_incremental_fixed": 1800,
+      "long_monthly": 900,
+      "gap": -787.4999999999982
+    },
+    {
+      "str_incremental_fixed": 1800,
+      "long_monthly": 1000,
+      "gap": -1735.4999999999982
+    }
+  ],
+  "break_even": [
+    {
+      "setup": 0,
+      "exact_nights": 183.53606789250352,
+      "minimum_whole_nights": 184
+    },
+    {
+      "setup": 5000,
+      "exact_nights": 202.39509665252237,
+      "minimum_whole_nights": 203
+    },
+    {
+      "setup": 10000,
+      "exact_nights": 221.25412541254124,
+      "minimum_whole_nights": 222
+    },
+    {
+      "setup": 15000,
+      "exact_nights": 240.1131541725601,
+      "minimum_whole_nights": 241
+    }
+  ],
+  "primary_listing_count": 6,
+  "primary_asking_median": 900.0,
+  "listing_screened_count": 21
+}
