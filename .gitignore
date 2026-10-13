@@ -1,3 +1,8 @@
 __pycache__/
-*.pyc
+*.py[cod]
 .venv/
+generated/
+.pytest_cache/
+.DS_Store
+Thumbs.db
+~$*

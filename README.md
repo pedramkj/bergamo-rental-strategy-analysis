@@ -1,69 +1,69 @@
-# Rental Strategies in Bergamo: More Tourists, More Profit?
+# Rental Strategies in Bergamo
 
-By Pedram Kojouri — research snapshot, 13 October 2026.
+**Does tourism growth make short-term renting more profitable than a residential lease?**
 
-## Business question
-Does growing tourism make short-term renting financially preferable to a residential lease in the **City of Bergamo**? Market demand is observed; owner cash income is modelled. This project does not estimate average city profit or guarantee investment returns.
+This study combines City of Bergamo tourism data, BGY airport traffic, rental listing screening and a cash-income model to compare rental strategies for an owner.
+
+| Illustrative base scenario | Annual net cash income |
+|---|---:|
+| Short-term rental | €6,544.50 |
+| Long-term residential rental | €6,732.00 |
+| Short-term minus long-term | −€187.50 |
+
+These are scenario results, not observed market-average profits. The small difference does not support a confident ranking. Bookings, realised nightly revenue, the alternative residential rent and additional expenses can reverse the result. Conversion costs raise the required surplus.
+
+## Project outputs
+
+- [Complete report](reports/Bergamo_Rental_Strategies_Complete_EN_v03.pdf) and [editable Word version](reports/Bergamo_Rental_Strategies_Complete_EN_v03.docx)
+- [Nine-page LinkedIn summary](publication/Bergamo_LinkedIn_Carousel_EN_Final.pdf) and [editable presentation](publication/Bergamo_LinkedIn_Carousel_EN_Final.pptx)
+- [Shared financial model](src/financial_model.py), [tourism and cash analysis](src/analysis.py), [airport comparison](src/airport_analysis.py), and [15 regression tests](tests/test_analysis.py)
+- [Scenario inputs](data/assumptions.json), [listing screening](data/listings.csv), [financial results](results/analysis.json), and [airport results](results/airport-comparison.csv)
+
+![Scenario sensitivity to bookings and gross nightly revenue](figures/sensitivity.png)
+
+## Analytical approach
+
+The analysis reconciles 72 monthly city observations for 2019–2024 with six annual controls, allocates assumed bookings using historical seasonality, and compares net cash under alternative prices, bookings, residential rents, operating budgets and preparation costs. A separate join compares seven annual BGY passenger totals with city arrivals and guest nights.
+
+City guest nights grew 52.7% between 2019 and 2024. In 2025, airport passenger movements declined 2.4% while city guest nights grew 12.6%. Airport activity cannot substitute for property reservation evidence. No causal airport effect is estimated.
+
+The business value is a transparent comparison of revenue, expenses and the rental alternative before an owner commits to conversion.
 
 ## Reproduce
-Python 3.10 or newer; no external dependencies for the core analysis.
+
+The core scripts and tests use Python's standard library. Tested on Python 3.12.14.
 
 ```sh
-python analysis.py
-python airport_analysis.py
+python src/analysis.py
+python src/airport_analysis.py
+python -m unittest discover -s tests -v
 ```
 
-The script validates 72 monthly observations against six annual controls, reconstructs seasonal allocations, calculates both strategies, checks ceiling break-even requirements and generates `results/analysis.json`. It runs entirely offline using the frozen snapshots. Assertions fail on missing controls or changed arithmetic. It does not download current listings.
+The scripts run offline and regenerate the three files in `results/`. Production validation remains active with `python -O`. Inputs live in `data/assumptions.json`; cash and break-even formulas live in `src/financial_model.py` and are shared with report generation.
 
-To rebuild the illustrated Word report, install `requirements-report.txt` and run `build_report.py` from this repository directory. The report is written to `report/`. Matplotlib generates eight figures with titles, units and source notes in their document captions.
+To rebuild the report and eight figures:
 
-## Findings and assumptions
-- City guest nights rose from 791,353 in 2019 to 1,208,189 in the 2024 regional extract. The 2025 local report gives 1,359,923; this is a different release and no validated 2025 monthly series is included.
-- April–October is a recurring broad high-demand season. City guest nights are not apartment booked nights. The assumed 180 booked nights are seasonally distributed, not estimated from a reservation panel.
-- Base short-term annual net cash: EUR 6,544.50. Long-term: EUR 6,732. Difference: EUR -187.50. These inputs cannot support a robust ranking.
-- 180 bookings, 330 available nights, EUR 115 gross nightly revenue, 15.5% host fee and eligible 21% tax are conditional assumptions. EUR 115 is reference-informed, **not verified as directly comparable gross ADR**.
-- Owner-paid cleaning: EUR 30 per turnover and three-night stays. No separate guest cleaning charge. Other variable allowance: EUR 10 per booked night. Common fixed allowance EUR 1,800; additional short-term allowance EUR 1,200. No owner-time valuation is deducted.
-- Acquisition, borrowing, exceptional repairs, professional management and incremental preparation are excluded from base cash. Five-year preparation recovery is a separate, undiscounted illustration.
+```sh
+python -m pip install -r requirements.txt
+python src/build_report.py
+```
 
-## Listing screening
-`data/listings.csv` records 21 unique candidate IDs: original three plus 18 additional candidates. Only six furnished one-bedroom offers with a 4+4 option and approximately 45–60 dwelling square metres enter the primary cohort. Sample median EUR 900 is descriptive, not a city benchmark. Furnishing, parking, surface definitions and quality are not perfectly matched. Temporary, annual, serviced and unconfirmed contracts are separated. A later failed re-fetch does not erase the earlier snapshot or establish current availability.
+The tested report dependencies are pinned. Rebuilds go to ignored `generated/report/`, preserving published assets. The frozen narrative is protected by a canonical input fingerprint in [publication-manifest.json](data/publication-manifest.json). Changed assumptions require a reviewed narrative update. Refresh Word's contents field before PDF export; Microsoft Word or compatible software is required. The Python builder does not export PDFs. The carousel is supplied as an editable PPTX, without a portable automated authoring pipeline.
 
-**The proposed 15–30 genuinely comparable listings target remains unmet.** Including unsuitable offers to inflate sample size would mislead. No probability sample, causal estimate or confidence interval is claimed.
+## Assumptions and limitations
 
-## Data provenance and rights
-Regional monthly source: https://www.dati.lombardia.it/d/mzxz-sz25
-Regional annual control: https://www.dati.lombardia.it/d/vyxt-7jdx
-City scope: Comune di Bergamo, ISTAT 016024 (some portal fields omit leading zero).
+The short-term base assumes 180 booked nights, 330 available nights, €115 gross nightly revenue, a 15.5% host fee and eligible 21% income tax. Owner-paid cleaning costs €30 per turnover with a three-night stay. The €115 input is reference-informed, not verified comparable realised gross ADR. Tourism seasonality estimates timing rather than proving the annual booking total.
 
-Source endpoints: `https://www.dati.lombardia.it/resource/{dataset_id}.json` filtered to `comune='Bergamo'`. Frozen files preserve the project extract; rerunning on a live release may produce revisions. Monthly derived data are aggregate numerical observations with source attribution. Annual control contains only city aggregate rows. No claim of ownership of source data is made; reuse remains subject to provider terms. Provider metadata should be consulted before broader redistribution.
+The model excludes owner-time valuation, financing, acquisition and professional management. Fixed-cost allowances are illustrative budgets. Legal eligibility and actual expenses require property-specific verification.
 
-FULL research (Chiodelli and Cassiani, 2026) uses AirDNA estimates for historical short-term performance. FULL and AirDNA are **not independent corroborations**. Proprietary listing-level reservation data are not redistributed here. Listing registry contains independently tabulated factual fields, URLs and screening decisions only: no copied descriptions, photographs, names, phone numbers or contacts. Other source URLs and qualifications appear in the report references.
+Six of 21 rental candidates form the primary furnished 4+4-option cohort. Its €900 asking-rent median is not a city benchmark; the 15–30 comparable-offer target remains unmet. Historical short-term estimates and 2026 asking rents cover different periods. FULL's Airbnb estimates derive from AirDNA and are not independent corroborations. Sensitivity combinations are not forecasts or confidence intervals.
 
-2024 regional/local releases differ by one arrival and four guest nights overall, and by 27 October guest nights. This unresolved revision discrepancy is retained in the report rather than silently pooled.
+## Sources and reuse
 
-## Interpretation limits
-Tourism peaks do not imply full occupancy. Blocked platform calendars are not verified bookings. Airport traffic and Milan events have not been linked causally to Bergamo property income. Local legal eligibility, current municipal amendments, taxes and supplier costs require property-specific verification; CIN alone does not establish compliance. Fixed-cost line items and stress ranges are analyst budgeting assumptions, not local quotes.
+[Regione Lombardia monthly tourism](https://www.dati.lombardia.it/d/mzxz-sz25), [annual controls](https://www.dati.lombardia.it/d/vyxt-7jdx), [Provincia di Bergamo 2025 release](https://www.provincia.bergamo.it/cnvpbgrm/po/mostra_news.php?area=H&id=2591), and [Assaeroporti traffic tables](https://assaeroporti.com/statistiche/?month=12&selectedYear=2025) provide the principal aggregate series. The report lists all research, listing and regulatory citations.
 
-## Files
-`analysis.py`: dependency-free calculations and validation.
-`data/`: frozen inputs and listing decisions.
-`results/analysis.json`: generated results.
-`build_report.py`: English Word report and charts.
-`report/`: generated deliverables, included in the downloadable local package.
+Regional and local 2024 releases differ slightly, including 27 October guest nights. The discrepancy remains documented. Snapshots contain attributed aggregate numbers and tabulated listing facts, not proprietary reservation records or copied listing descriptions. Provider rights and terms still apply; no repository-wide reuse licence has been selected.
 
-Conclusion: a credible market opportunity with conditional competitiveness; no proven general advantage for converting homes across Bergamo.
+`src/` contains calculations and report generation; `data/` contains frozen evidence and assumptions; `results/` contains computed outputs; `figures/` contains eight charts; `reports/` contains the complete study and requested separate contents; `publication/` contains LinkedIn assets. No empty notebook folders or development logs are included.
 
-## Complete v03 report and publication assets
-The two previous report versions were compared. The v02 financial model and limitations were retained, duplicates removed, and the airport comparison plus a dedicated methodology/challenges chapter added. Eight chapters now include a separate contents page and a clickable author LinkedIn header on every report page.
-
-- `report/Bergamo_Rental_Strategies_Complete_EN_v03.pdf`: complete English report.
-- `report/Bergamo_Rental_Strategies_Complete_EN_v03.docx`: editable report.
-- `report/Bergamo_Report_Contents_EN.pdf`: separate contents (page numbers refer to v03).
-- `publication/Bergamo_LinkedIn_Carousel_EN_Final.pdf`: nine-page LinkedIn carousel.
-- `publication/LinkedIn_Caption_EN.txt`: 193-word caption, prepared for review, not posted.
-
-`airport_analysis.py` validates seven 2019–2025 annual airport totals against two Assaeroporti tables for each year and produces a city join, indexed growth and year-on-year changes. In 2025, passengers declined 2.4% while city arrivals grew 10.7% and guest nights grew 12.6%. This divergence prevents treating airport passengers as a direct reservation proxy. No causal airport-to-profit effect is estimated. Annual passenger movements are not unique local tourists.
-
-`data/airport-bgy-source-rows.json` contains only numeric Bergamo rows from Assaeroporti traffic tables, with source URLs. Both monthly December and cumulative January–December records are preserved for audit; the analysis uses cumulative passenger totals. The analyst-tabulated `airport-city-annual.json` joins these values to official city observations. City 2025 is from the 14 May 2026 Provincia release, rather than the regional series through 2024. Source rights remain with providers. No source page text, photographs or personal data are redistributed.
-
-The Word builder creates a live contents field. Refresh fields in Microsoft Word before PDF export to populate the contents and page numbers. Word or another compatible renderer is required for PDF output; the Python builder does not render PDFs itself. The carousel follows Pedram Kojouri's existing brand kit and uses editable chart/table objects. Its displayed index values round to two decimals; full calculations remain in the data and JSON output.
+[Pedram Kojouri on LinkedIn](https://www.linkedin.com/in/pedram-kojouri/)

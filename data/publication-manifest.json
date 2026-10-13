@@ -1,0 +1,6 @@
+{
+  "assumptions_sha256": "364fccbc2cf8873d10fb878f29ad04e9ed8cb09ad279e8cf27a1f2c80587f698",
+  "purpose": "Guard against rebuilding frozen research prose with changed financial inputs",
+  "research_snapshot": "2026-10-13",
+  "encoding": "canonical JSON with sorted keys and compact separators"
+}

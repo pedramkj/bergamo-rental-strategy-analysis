@@ -1,5 +1,21 @@
 import json, math
 from pathlib import Path
+import argparse
+from financial_model import load_assumptions, validate_assumptions, str_cash, ltr_cash, cash_bridge, booking_threshold, required_nightly_price, snapshot_fingerprint, BOOKING_SCENARIOS, PRICE_SCENARIOS, RENT_SCENARIOS, COMPARISON_RENTS, INCREMENTAL_COST_SCENARIOS, PREPARATION_SCENARIOS
+ROOT=Path(__file__).resolve().parents[1]
+parser=argparse.ArgumentParser(description='Rebuild the frozen study report without overwriting published assets')
+parser.add_argument('--output-dir',type=Path,default=ROOT/'generated/report')
+args=parser.parse_args()
+a=load_assumptions();validate_assumptions(a)
+manifest=json.loads((ROOT/'data/publication-manifest.json').read_text(encoding='utf8'))
+if snapshot_fingerprint(a)!=manifest['assumptions_sha256']:
+    raise ValueError('The frozen report narrative requires its original assumption snapshot')
+short_net=str_cash(a['booked_nights'],a['gross_nightly_eur'],a)
+long_net=ltr_cash(a['long_monthly'],a)
+# Narrative quotes the frozen study. Reject a changed model rather than emit stale claims.
+reference=json.loads((ROOT/'results/analysis.json').read_text(encoding='utf8'))
+if abs(short_net-reference['str_net'])>1e-8 or abs(long_net-reference['ltr_net'])>1e-8:
+    raise ValueError('Report inputs differ from the published study; update and review the research narrative before rebuilding')
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -9,10 +25,10 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
-out=Path(__file__).resolve().parent/'report';out.mkdir(exist_ok=True)
+out=args.output_dir;out.mkdir(parents=True,exist_ok=True)
 charts=out/'charts';charts.mkdir(exist_ok=True)
-raw=json.loads((Path(__file__).resolve().parent/'data/validated-monthly-analysis.json').read_text(encoding='utf8'))
-season=json.loads((Path(__file__).resolve().parent/'data/seasonal-booking-estimate.json').read_text(encoding='utf8'))
+raw=json.loads((ROOT/'data/validated-monthly-analysis.json').read_text(encoding='utf8'))
+season=json.loads((ROOT/'data/seasonal-booking-estimate.json').read_text(encoding='utf8'))
 plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'axes.spines.top':False,'axes.spines.right':False,'figure.dpi':170})
 def save(name):
     titles={'airport.png':'BGY annual passenger movements 2019–2025','airport-city.png':'BGY and City of Bergamo growth since 2019','growth.png':'City of Bergamo guest nights by year','season.png':'City of Bergamo monthly guest nights in 2024','allocation.png':'Seasonal allocation of 180 scenario booked nights','bridge.png':'Short-term rental scenario annual cash bridge','sensitivity.png':'Short-term rental price and booking sensitivity','setup.png':'Booked nights required for five-year cost recovery'}
@@ -24,21 +40,21 @@ mon=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 r24=sorted([x for x in raw if x['year']==2024],key=lambda x:x['month'])
 fig,ax=plt.subplots(figsize=(7,3));ax.bar(mon,[x['guest_nights']/1000 for x in r24],color='#1C4C74');ax.set_ylabel('Observed guest nights (thousands)');save('season.png')
 fig,ax=plt.subplots(figsize=(7,3));ax.bar(mon,[x['bookings']['180'] for x in season['months']],color='#1C4C74');ax.set_ylabel('Scenario booked nights');ax.set_ylim(0,22);save('allocation.png')
-fig,ax=plt.subplots(figsize=(7,2.5));labels=['Gross','Tax','Platform','Cleaning','Variable','Fixed','Net cash'];v=[20700,-4347,-3208.5,-1800,-1800,-3000,6544.5];running=0
+fig,ax=plt.subplots(figsize=(7,2.5));labels=['Gross','Tax','Platform','Cleaning','Variable','Fixed','Net cash'];v=cash_bridge(a);running=0
 for i,value in enumerate(v):
     if i in [0,6]:ax.bar(i,value,color='#1C4C74' if i==0 else '#32B8B2');top=value
     else:ax.bar(i,-value,bottom=running+value,color='#A8B7C5');top=running
     ax.text(i,top+350,f'{abs(value):,.0f}',ha='center',fontsize=9)
     if i!=6:running+=value
 ax.set_xticks(range(7),labels);ax.set_ylabel('EUR per year');ax.set_ylim(0,23500);save('bridge.png')
-fig,ax=plt.subplots(figsize=(7,3));ns=[150,180,210]
-for a,c in [(100,'#64798B'),(115,'#1C4C74'),(130,'#32B8B2')]:ax.plot(ns,[n*(a*.635-20)-3000 for n in ns],marker='o',label=f'Nightly revenue EUR {a}',color=c)
-ax.axhline(6732,color='#A34A32',linestyle='--',label='Long-term scenario EUR 6,732');ax.set_xticks(ns);ax.set_xlabel('Annual booked nights');ax.set_ylabel('Annual net cash income EUR');ax.legend(frameon=False,fontsize=8);save('sensitivity.png')
-fig,ax=plt.subplots(figsize=(7,2.8));setup=[0,5000,10000,15000];n=[math.ceil((6732+3000+s/5)/(115*.635-20)) for s in setup];ax.bar([f'{s:,}' for s in setup],n,color='#1C4C74')
+fig,ax=plt.subplots(figsize=(7,3));ns=BOOKING_SCENARIOS
+for adr,c in zip(PRICE_SCENARIOS,['#64798B','#1C4C74','#32B8B2']):ax.plot(ns,[str_cash(n,adr,a) for n in ns],marker='o',label=f'Nightly revenue EUR {adr}',color=c)
+ax.axhline(long_net,color='#A34A32',linestyle='--',label='Long-term scenario EUR 6,732');ax.set_xticks(ns);ax.set_xlabel('Annual booked nights');ax.set_ylabel('Annual net cash income EUR');ax.legend(frameon=False,fontsize=8);save('sensitivity.png')
+fig,ax=plt.subplots(figsize=(7,2.8));setup=PREPARATION_SCENARIOS;n=[booking_threshold(cost,a)['minimum_whole_nights'] for cost in setup];ax.bar([f'{s:,}' for s in setup],n,color='#1C4C74')
 for i,v in enumerate(n):ax.text(i,v+4,str(v),ha='center')
 ax.set_ylim(0,280);ax.set_xlabel('Incremental preparation cost EUR');ax.set_ylabel('Required booked nights');save('setup.png')
 
-airport=json.loads((Path(__file__).resolve().parent/'data/airport-city-annual.json').read_text())
+airport=json.loads((ROOT/'data/airport-city-annual.json').read_text(encoding='utf8'))
 fig,ax=plt.subplots(figsize=(7,2.8));ax.bar([r['year'] for r in airport],[r['airport_passengers']/1e6 for r in airport],color='#1C4C74');ax.set_xticks(range(2019,2026));ax.set_ylabel('Annual passenger movements (millions)');save('airport.png')
 fig,ax=plt.subplots(figsize=(7,3));
 for key,label,col in [('airport_passengers','BGY passengers','#64798B'),('city_arrivals','City arrivals','#1C4C74'),('city_guest_nights','City guest nights','#32B8B2')]:
@@ -173,15 +189,15 @@ fig('sensitivity.png','Figure 7  Booking and nightly-price sensitivity','The das
 sub('Break-even and calculation checks')
 p('At EUR 115, each booked night contributes EUR 53.025 before fixed expenses. Matching long-term cash requires (6,732 + 3,000) / 53.025 = 183.54 nights, rounded up to 184. At 180 nights, the required price is EUR 116.64. Increasing price by EUR 1 adds EUR 114.30 annual cash, holding bookings fixed. One additional percentage point of host fee costs EUR 207; EUR 5 less cleaning per turnover saves EUR 300 across sixty turnovers.')
 page();sub('Long-term rent and differential-cost sensitivity')
-table(['Monthly rent EUR','Long-term net EUR/year','STR minus LTR EUR/year'],[[f'{r:,}',f'{r*12*.79-1800:,.2f}',f'{6544.5-(r*12*.79-1800):+,.2f}'] for r in [700,800,900,1000,1100]])
+table(['Monthly rent EUR','Long-term net EUR/year','STR minus LTR EUR/year'],[[f'{r:,}',f'{ltr_cash(r,a):,.2f}',f'{short_net-ltr_cash(r,a):+,.2f}'] for r in RENT_SCENARIOS])
 p('All rows assume twelve paid months, eligible 21% tax and EUR 1,800 owner costs. These are scenario values, not five observed market segments. At the base short-term performance, equal cash occurs at about EUR 880.22 monthly long-term rent. The choice of alternative rent therefore matters as much as the short-term inputs.')
-table(['STR additional fixed EUR/year','LTR 800/month','LTR 900/month','LTR 1,000/month'],[[str(c)]+[f'{180*(115*.635-20)-1800-c-(r*12*.79-1800):+,.2f}' for r in [800,900,1000]] for c in [600,1200,1800]])
+table(['STR additional fixed EUR/year','LTR 800/month','LTR 900/month','LTR 1,000/month'],[[str(c)]+[f'{str_cash(a["booked_nights"],a["gross_nightly_eur"],a,c)-ltr_cash(r,a):+,.2f}' for r in COMPARISON_RENTS] for c in INCREMENTAL_COST_SCENARIOS])
 p('Cells show short-term minus long-term annual net cash, in EUR. Positive cells favour short-term on cash alone; negative cells favour long-term. Common costs are held at EUR 1,800 and all other base inputs are held constant. At EUR 900 rent, changing the STR-specific budget from EUR 1,200 to EUR 600 reverses the gap from minus EUR 187.50 to plus EUR 412.50. A EUR 600 higher budget produces minus EUR 787.50. Joint price and booking feasibility remains untested.')
 
 page();sub('Additional preparation changes the threshold')
 p('Only expenditure above the long-term alternative is relevant to conversion. A five-year simple recovery target adds preparation cost divided by five to the required annual surplus. It leaves operating cash unchanged and is not a market-required horizon or a discounted investment appraisal.')
 fig('setup.png','Figure 8  Booking threshold with five-year simple recovery','At EUR 115 nightly revenue, the model requires 184, 203, 222 and 241 nights for EUR 0, EUR 5,000, EUR 10,000 and EUR 15,000 additional preparation. The latter thresholds match long-term cash and recover the cost difference over five years. They do not predict achievable occupancy. Source: project calculations with explicit scenario inputs.')
-table(['Additional preparation','Nights at EUR 115','Price at 180 nights'],[['EUR 0','184','EUR 116.64'],['EUR 5,000','203','EUR 125.39'],['EUR 10,000','222','EUR 134.14'],['EUR 15,000','241','EUR 142.89']])
+table(['Additional preparation',f'Nights at EUR {a["gross_nightly_eur"]}',f'Price at {a["booked_nights"]} nights'],[[f'EUR {cost:,}',str(booking_threshold(cost,a)['minimum_whole_nights']),f'EUR {required_nightly_price(cost,a):.2f}'] for cost in setup])
 p('Required booked nights are always rounded UP to the next whole night using the ceiling function; conventional rounding would understate the minimum. Unrounded thresholds are 183.54, 202.40, 221.25 and 240.11 nights using the stated formula. These are scenario requirements, not occupancy forecasts.')
 p('The two performance columns are alternatives, not simultaneous improvements. Financing, inflation, discounting and residual equipment value are excluded. Already suitable properties face a close operating comparison; costly conversion requires a substantiated surplus. More visitors alone cannot justify that investment.')
 page();h('7 Research methodology and challenges')
@@ -251,8 +267,11 @@ src.append((str(43),'Assaeroporti. 2025 December traffic tables, January–Decem
 for num,label,url in src:
     refp=p('['+num+'] '+label);refp.paragraph_format.keep_with_next=True;x=p('');link=OxmlElement('w:hyperlink');link.set(qn('r:id'),x.part.relate_to(url,RT.HYPERLINK,is_external=True));rr=OxmlElement('w:r');rp=OxmlElement('w:rPr');sz=OxmlElement('w:sz');sz.set(qn('w:val'),'18');rp.append(sz);rr.append(rp);tt=OxmlElement('w:t');tt.text=url;rr.append(tt);link.append(rr);x._p.append(link)
 p('Reproducible analysis: https://github.com/pedramkj/bergamo-rental-strategy-analysis. The repository provides Python calculations, validation checks, data snapshots, the listing registry and a README. No personal documents or full copyrighted listing text are included.')
-p('Project calculations are retained in validated-monthly-analysis.json, validation.json, seasonal-booking-estimate.json, monthly-financial-scenario.json and cash-breakeven.json. The present model uses exactly 180 nights, replacing the earlier fractional 181.5-night illustration. No owner-time deduction is included. The eight charts are generated from those observations and explicit assumptions.')
+p('Project inputs are retained in data/validated-monthly-analysis.json, data/validation.json and data/seasonal-booking-estimate.json. Financial and break-even calculations are in results/analysis.json; airport comparisons are in results/airport-comparison.json. The present model uses exactly 180 nights, replacing the earlier fractional 181.5-night illustration. No owner-time deduction is included. The eight charts are generated from those observations and explicit assumptions.')
 for b in list(d.element.iter(qn('w:pBdr'))):b.getparent().remove(b)
+d.core_properties.title='Rental Strategies in Bergamo: More Tourists, More Profit?'
+d.core_properties.author='Pedram Kojouri'
+d.core_properties.last_modified_by='Pedram Kojouri'
 d.save(out/'Bergamo_Rental_Strategies_Complete_EN_v03.docx')
 print((out/'Bergamo_Rental_Strategies_Complete_EN_v03.docx').resolve())
 
