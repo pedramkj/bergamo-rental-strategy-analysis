@@ -1,4 +1,4 @@
-Executive finding	1
+Main business finding	1
 1 Introduction and analytical scope	3
 Geography and evidence	3
 Definitions and validation	3
@@ -12,7 +12,7 @@ Monthly allocation and its limits	8
 Neighborhood differences	8
 4 The long-term rental comparison	9
 Long-term cash assumptions	9
-Expanded rental listing screening	10
+Rental listing methodology and verification	10
 5 Revenue, Costs and Net Cash Income	11
 Fixed-cost budget and uncertainty	12
 Regulatory feasibility	13
@@ -26,3 +26,4 @@ Reproducibility and review	16
 Supported findings	17
 Unresolved evidence	17
 References	18
+Appendix A Rental registry audit	21

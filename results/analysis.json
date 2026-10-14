@@ -173,5 +173,7 @@
   ],
   "primary_listing_count": 6,
   "primary_asking_median": 900.0,
-  "listing_screened_count": 21
+  "listing_screened_count": 21,
+  "rent_baseline_status": "retained scenario assumption; not verified as the arithmetic mean of 21 eligible city-centre rents",
+  "listing_review_file": "results/listing-review.json"
 }

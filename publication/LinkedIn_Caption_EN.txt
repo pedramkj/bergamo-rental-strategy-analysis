@@ -8,7 +8,7 @@ The base scenario produced €6,545 annually for short-term renting and €6,732
 
 An unexpected finding: BGY passenger traffic fell 2.4% in 2025 while city guest nights grew 12.6%. Airport activity cannot serve as a direct proxy for apartment reservations.
 
-The project includes source reconciliation, seasonal allocation, sensitivity analysis for both strategies, and preparation-cost thresholds. I documented the remaining evidence gaps alongside the results.
+The project includes source reconciliation, seasonal allocation, sensitivity analysis for both strategies, and preparation-cost thresholds. I also audited the rental evidence: the saved registry contains 21 records, but four prices are missing and city-centre membership is unverified. The €900 monthly rent remains a scenario assumption, not a verified 21-listing arithmetic mean.
 
 Full report, data and reproducible code:
 https://github.com/pedramkj/bergamo-rental-strategy-analysis

@@ -1,6 +1,7 @@
 """Offline reproduction of the report, using only Python's standard library."""
 import calendar, csv, json, math, statistics
 from pathlib import Path
+from listing_review import review as review_rental_records
 from financial_model import str_cash, ltr_cash, booking_threshold, validate_assumptions, BOOKING_SCENARIOS, RENT_SCENARIOS, COMPARISON_RENTS, INCREMENTAL_COST_SCENARIOS, PREPARATION_SCENARIOS
 ROOT = Path(__file__).resolve().parents[1]
 def read(name):
@@ -65,6 +66,10 @@ def run():
         if not (str_cash(b['minimum_whole_nights'] - 1, a['gross_nightly_eur'], a) < target):
             raise ValueError('Break-even threshold is not minimal')
     out=ROOT/'results';out.mkdir(exist_ok=True)
+    audit=review_rental_records()
+    result['rent_baseline_status']=audit['baseline_status']
+    result['listing_review_file']='results/listing-review.json'
+    (out/'listing-review.json').write_text(json.dumps(audit,indent=2,ensure_ascii=False)+'\n',encoding='utf8')
     (out/'analysis.json').write_text(json.dumps(result,indent=2,ensure_ascii=False),encoding='utf8')
     print(json.dumps({k:result[k] for k in ['str_net','ltr_net','gap','primary_listing_count','primary_asking_median']},indent=2))
     return result
