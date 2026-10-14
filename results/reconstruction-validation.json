@@ -1,0 +1,104 @@
+{
+  "review_date": "2026-10-14",
+  "baseline_commit": "709d4576b9040d02cd9d2114c291cb7854bcb028",
+  "tests": {
+    "command": "python -m unittest discover -s tests -v",
+    "passed": 45,
+    "failed": 0
+  },
+  "protected_historical_git_objects_unchanged": [
+    "data/listings.csv",
+    "data/assumptions.json",
+    "src/financial_model.py",
+    "results/analysis.json",
+    "results/airport-comparison.json",
+    "figures/airport-city.png",
+    "figures/airport.png",
+    "figures/allocation.png",
+    "figures/bergamo-cover-art.png",
+    "figures/bergamo-cover-art.svg",
+    "figures/bridge.png",
+    "figures/growth.png",
+    "figures/season.png",
+    "figures/sensitivity.png",
+    "figures/setup.png"
+  ],
+  "rental_input_fingerprints_valid": true,
+  "pdf_checks": {
+    "reports/Bergamo_Rental_Strategies_Complete_EN_v03.pdf": {
+      "pages": 33,
+      "pages_with_linkedin_link": 33
+    },
+    "reports/Bergamo_Report_Contents_EN.pdf": {
+      "pages": 1,
+      "pages_with_linkedin_link": 1
+    },
+    "publication/Bergamo_LinkedIn_Carousel_EN_Final.pdf": {
+      "pages": 9,
+      "pages_with_linkedin_link": 9
+    }
+  },
+  "presentation": {
+    "slides": 9,
+    "native_charts": 4,
+    "embedded_chart_workbooks": 4,
+    "unchanged_historical_charts_and_workbooks": [
+      1,
+      2,
+      3
+    ],
+    "updated_break_even_chart_and_workbook": 4,
+    "package_integrity": "pass",
+    "first_party_import": "pass",
+    "layout_findings": 0
+  },
+  "rendering": {
+    "report": "Microsoft Word native PDF export; page-by-page visual review",
+    "carousel": "Microsoft PowerPoint native PDF export; slide-by-slide visual review",
+    "contents": "Microsoft Word native PDF export; visual review",
+    "generic_renderer_limitation": "LibreOffice not installed; native Office export used"
+  },
+  "changed_file_paths": [
+    "README.md",
+    "data/publication-manifest.json",
+    "data/rental/assistant-20-audit.csv",
+    "data/rental/candidate-register.csv",
+    "data/rental/canonical-properties.csv",
+    "data/rental/data-dictionary.md",
+    "data/rental/deduplication-decisions.csv",
+    "data/rental/duplicate-clusters.csv",
+    "data/rental/market-benchmarks.csv",
+    "data/rental/master-listing-registry.csv",
+    "data/rental/original-21-audit.csv",
+    "data/rental/primary-comparable-sample.csv",
+    "data/rental/secondary-sample.csv",
+    "data/rental/source-observations.csv",
+    "data/rental/source-register.csv",
+    "figures/rental/break-even-comparison.png",
+    "figures/rental/candidate-screening.png",
+    "figures/rental/net-cash-comparison.png",
+    "figures/rental/rent-distribution.png",
+    "figures/rental/rent-sensitivity.png",
+    "figures/rental/unit-price-context.png",
+    "figures/report-cover.png",
+    "publication/Bergamo_LinkedIn_Carousel_EN_Final.pdf",
+    "publication/Bergamo_LinkedIn_Carousel_EN_Final.pptx",
+    "publication/LinkedIn_Caption_EN.txt",
+    "reports/Bergamo_Rental_Strategies_Complete_EN_v03.docx",
+    "reports/Bergamo_Rental_Strategies_Complete_EN_v03.pdf",
+    "reports/Bergamo_Report_Contents_EN.docx",
+    "reports/Bergamo_Report_Contents_EN.pdf",
+    "reports/Bergamo_Report_Contents_EN.txt",
+    "reports/Rental_Listing_Investigation.md",
+    "results/reconstruction-validation.json",
+    "results/rental-market-analysis.json",
+    "src/build_report.py",
+    "src/rental_figures.py",
+    "src/rental_market_analysis.py",
+    "src/rental_report_sections.py",
+    "src/report_cover.py",
+    "tests/test_publication_consistency.py",
+    "tests/test_rental_market.py"
+  ],
+  "claim_boundary": "Release checks validate arithmetic, artifacts and preserved snapshots; they do not confirm actual apartment availability, signed rents or future profitability."
+}

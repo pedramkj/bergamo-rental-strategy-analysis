@@ -1,0 +1,3 @@
+property_id,candidate_ids,source_urls,decision,price_status
+P-A05,C13;A05,https://www.immobiliare.it/annunci/120078316/,confirmed_duplicate,consistent
+P-A02,A02;N53,https://www.immobiliare.it/annunci/133340190/;https://www.subito.it/appartamenti/2-locali-a-bergamo-bergamo-663707911.htm,confirmed_duplicate,conflict

@@ -1,16 +1,18 @@
 More tourists, more rental profit? I tested that assumption for Bergamo.
 
-City guest nights increased by 52.7% between 2019 and 2024. But demand growth alone does not tell a homeowner which rental strategy leaves more cash.
+Official city guest nights rose 52.7% between 2019 and 2024. But more visitors do not automatically make short-term renting the better business choice.
 
-For this Data Analytics case study, I reconciled 72 monthly tourism observations with annual controls, screened residential rental listings, and built a Python model comparing short-term and long-term net cash income. I also joined BGY airport traffic with city tourism data for 2019–2025.
+I reconciled 21 historical listing records with 20 preliminary leads and 55 additional advertisements. After checking contract terms, separating charges and reviewing property identity, the strict central furnished one-bedroom sample contained 14 properties.
 
-The base scenario produced €6,545 annually for short-term renting and €6,732 for long-term renting. These are modelled outcomes, not observed city averages. A €187.50 difference is too small to support a confident ranking when price, bookings and expenses remain uncertain.
+Their base asking rent averaged € 894.29 per month, with a median of € 850. The 20-property target was not reached, and the criteria stayed unchanged.
 
-An unexpected finding: BGY passenger traffic fell 2.4% in 2025 while city guest nights grew 12.6%. Airport activity cannot serve as a direct proxy for apartment reservations.
+Using the unrounded mean and the same expense assumptions, the Python model gives € 6,677.83 annual net cash for long-term renting versus € 6,544.50 short-term: a gap of only € 133.33. These are conditional model outcomes, not observed profits.
 
-The project includes source reconciliation, seasonal allocation, sensitivity analysis for both strategies, and preparation-cost thresholds. I also audited the rental evidence: the saved registry contains 21 records, but four prices are missing and city-centre membership is unverified. The €900 monthly rent remains a scenario assumption, not a verified 21-listing arithmetic mean.
+One research challenge mattered: a € 900 mid-term package could not be treated as € 900 conventional base rent. Another property appeared across platforms with conflicting prices, so it was excluded.
 
-Full report, data and reproducible code:
+The historical € 900 scenario remains preserved. Sensitivity analysis shows why paid months, operating costs and conversion spending can matter more than this small cash difference.
+
+Full report, complete candidate audit and reproducible Python:
 https://github.com/pedramkj/bergamo-rental-strategy-analysis
 
 I’m interested in junior Data Analyst and Business Analyst opportunities in Italy.

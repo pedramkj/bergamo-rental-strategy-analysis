@@ -1,0 +1,97 @@
+candidate_id,origin,url,recorded_price,recorded_size,recorded_location,original_record_id,lead_status
+C01,original_21,https://www.immobiliare.it/annunci/132189102/,1400,60,San Paolo,132189102,historical_snapshot
+C02,original_21,https://www.immobiliare.it/annunci/133410334/,790,60,,133410334,historical_snapshot
+C03,original_21,https://www.immobiliare.it/annunci/132644842/,850,53,Canovine,132644842,historical_snapshot
+C04,original_21,https://www.immobiliare.it/annunci/70888294/,,,,70888294,historical_snapshot
+C05,original_21,https://www.immobiliare.it/annunci/80219117/,1.000,48,,80219117,historical_snapshot
+C06,original_21,https://www.immobiliare.it/annunci/130803940/,1.200,55,,130803940,historical_snapshot
+C07,original_21,https://www.immobiliare.it/annunci/132502222/,1.000,66,,132502222,historical_snapshot
+C08,original_21,https://www.immobiliare.it/annunci/133336888/,750,60,Canovine,133336888,historical_snapshot
+C09,original_21,https://www.immobiliare.it/annunci/129790224/,900,60,,129790224,historical_snapshot
+C10,original_21,https://www.immobiliare.it/annunci/127707676/,1.200,62,,127707676,historical_snapshot
+C11,original_21,https://www.immobiliare.it/annunci/124638879/,,,,124638879,historical_snapshot
+C12,original_21,https://www.immobiliare.it/annunci/133410286/,,,,133410286,historical_snapshot
+C13,original_21,https://www.immobiliare.it/annunci/120078316/,850,45,,120078316,historical_snapshot
+C14,original_21,https://www.immobiliare.it/annunci/132219784/,1200,60,Centro,132219784,historical_snapshot
+C15,original_21,https://www.immobiliare.it/annunci/73676006/,1.200,50,,73676006,historical_snapshot
+C16,original_21,https://www.immobiliare.it/annunci/121511946/,,,,121511946,historical_snapshot
+C17,original_21,https://www.immobiliare.it/annunci/111380853/,1.400,48,,111380853,historical_snapshot
+C18,original_21,https://www.immobiliare.it/annunci/132513280/,900,60,Borgo Palazzo,132513280,historical_snapshot
+C19,original_21,https://www.idealista.it/immobile/36732340/,900,47,Borgo Palazzo,36732340,historical_snapshot
+C20,original_21,https://www.idealista.it/immobile/36084937/,1000,55,Centro,36084937,historical_snapshot
+C21,original_21,https://www.idealista.it/immobile/36830219/,700,50,Moroni,36830219,historical_snapshot
+A01,assistant_20,https://www.immobiliare.it/annunci/125389067/,950,50,Via Sant'Orsola 2,,preliminary_user_supplied_lead
+A02,assistant_20,https://www.immobiliare.it/annunci/133340190/,850,78,Via Sant'Orsola,,preliminary_user_supplied_lead
+A03,assistant_20,https://www.subito.it/appartamenti/bergamo-ampio-bilocale-arredato-di-cucina-nuova-bergamo-619426289.htm,700,40,Via Cucchi,,preliminary_user_supplied_lead
+A04,assistant_20,https://www.subito.it/appartamenti/privato-affitta-bilocale-in-centro-citta-bergamo-653230664.htm,650,57,Near Piazza Pontida,,preliminary_user_supplied_lead
+A05,assistant_20,https://www.immobiliare.it/annunci/120078316/,850,,Via Torquato Tasso 75,,preliminary_user_supplied_lead
+A06,assistant_20,https://www.immobiliare.it/annunci/129954480/,835,,Via del Lapacano 8,,preliminary_user_supplied_lead
+A07,assistant_20,https://www.immobiliare.it/annunci/130494022/,850,,Via Ezio Zambianchi 3,,preliminary_user_supplied_lead
+A08,assistant_20,,1000,,Via Borfuro 9,,preliminary_user_supplied_lead
+A09,assistant_20,,1200,,Via Teodoro Frizzoni 8,,preliminary_user_supplied_lead
+A10,assistant_20,https://www.immobiliare.it/annunci/118452033/,800,50,Via dei Partigiani 4,,preliminary_user_supplied_lead
+A11,assistant_20,https://www.immobiliare.it/annunci/131673398/,800,55,Viale Vittorio Emanuele II 71,,preliminary_user_supplied_lead
+A12,assistant_20,https://www.immobiliare.it/annunci/129057670/,800,70,Via Ezio Zambianchi 2,,preliminary_user_supplied_lead
+A13,assistant_20,https://www.immobiliare.it/annunci/99990082/,900,42,Via Broseta 44,,preliminary_user_supplied_lead
+A14,assistant_20,https://www.immobiliare.it/annunci/121341540/,800,66,Via Pignolo 116,,preliminary_user_supplied_lead
+A15,assistant_20,,800,40,Centro furnished renovated apartment,,preliminary_user_supplied_lead
+A16,assistant_20,https://www.idealista.it/immobile/35357208/,900,50,Piazza Pontida 11,,preliminary_user_supplied_lead
+A17,assistant_20,https://www.idealista.it/immobile/28375016/,900,61,Borgo Santa Caterina 81,,preliminary_user_supplied_lead
+A18,assistant_20,,900,60,Via Sant'Alessandro 22,,preliminary_user_supplied_lead
+A19,assistant_20,,850,74,Via Giuseppe Garibaldi 6,,preliminary_user_supplied_lead
+A20,assistant_20,,850,60,Via Angelo Maj,,preliminary_user_supplied_lead
+N01,additional_discovery,https://www.idealista.it/immobile/36990295/,,,,,new_source_review
+N02,additional_discovery,https://www.immobiliare.it/annunci/102251802/,,,,,new_source_review
+N03,additional_discovery,https://www.immobiliare.it/annunci/118716647/,,,,,new_source_review
+N04,additional_discovery,https://www.immobiliare.it/annunci/119100343/,,,,,new_source_review
+N05,additional_discovery,https://www.immobiliare.it/annunci/120629792/,,,,,new_source_review
+N06,additional_discovery,https://www.immobiliare.it/annunci/121142762/,,,,,new_source_review
+N07,additional_discovery,https://www.immobiliare.it/annunci/121725870/,,,,,new_source_review
+N08,additional_discovery,https://www.immobiliare.it/annunci/124049431/,,,,,new_source_review
+N09,additional_discovery,https://www.immobiliare.it/annunci/124400767/,,,,,new_source_review
+N10,additional_discovery,https://www.immobiliare.it/annunci/124508081/,,,,,new_source_review
+N11,additional_discovery,https://www.immobiliare.it/annunci/124544893/,,,,,new_source_review
+N12,additional_discovery,https://www.immobiliare.it/annunci/126363531/,,,,,new_source_review
+N13,additional_discovery,https://www.immobiliare.it/annunci/126790765/,,,,,new_source_review
+N14,additional_discovery,https://www.immobiliare.it/annunci/126794363/,,,,,new_source_review
+N15,additional_discovery,https://www.immobiliare.it/annunci/126815183/,,,,,new_source_review
+N16,additional_discovery,https://www.immobiliare.it/annunci/127171759/,,,,,new_source_review
+N17,additional_discovery,https://www.immobiliare.it/annunci/128974270/,,,,,new_source_review
+N18,additional_discovery,https://www.immobiliare.it/annunci/128995356/,,,,,new_source_review
+N19,additional_discovery,https://www.immobiliare.it/annunci/129488656/,,,,,new_source_review
+N20,additional_discovery,https://www.immobiliare.it/annunci/129956232/,,,,,new_source_review
+N21,additional_discovery,https://www.immobiliare.it/annunci/129960136/,,,,,new_source_review
+N22,additional_discovery,https://www.immobiliare.it/annunci/130068982/,,,,,new_source_review
+N23,additional_discovery,https://www.immobiliare.it/annunci/130165592/,,,,,new_source_review
+N24,additional_discovery,https://www.immobiliare.it/annunci/130590868/,,,,,new_source_review
+N25,additional_discovery,https://www.immobiliare.it/annunci/130905632/,,,,,new_source_review
+N26,additional_discovery,https://www.immobiliare.it/annunci/130999138/,,,,,new_source_review
+N27,additional_discovery,https://www.immobiliare.it/annunci/131260758/,,,,,new_source_review
+N28,additional_discovery,https://www.immobiliare.it/annunci/131313822/,,,,,new_source_review
+N29,additional_discovery,https://www.immobiliare.it/annunci/131325202/,,,,,new_source_review
+N30,additional_discovery,https://www.immobiliare.it/annunci/131527642/,,,,,new_source_review
+N31,additional_discovery,https://www.immobiliare.it/annunci/131996542/,,,,,new_source_review
+N32,additional_discovery,https://www.immobiliare.it/annunci/132022364/,,,,,new_source_review
+N33,additional_discovery,https://www.immobiliare.it/annunci/132022944/,,,,,new_source_review
+N34,additional_discovery,https://www.immobiliare.it/annunci/132085834/,,,,,new_source_review
+N35,additional_discovery,https://www.immobiliare.it/annunci/132204722/,,,,,new_source_review
+N36,additional_discovery,https://www.immobiliare.it/annunci/132381432/,,,,,new_source_review
+N37,additional_discovery,https://www.immobiliare.it/annunci/132484928/,,,,,new_source_review
+N38,additional_discovery,https://www.immobiliare.it/annunci/132631342/,,,,,new_source_review
+N39,additional_discovery,https://www.immobiliare.it/annunci/132840300/,,,,,new_source_review
+N40,additional_discovery,https://www.immobiliare.it/annunci/133013086/,,,,,new_source_review
+N41,additional_discovery,https://www.immobiliare.it/annunci/133487598/,,,,,new_source_review
+N42,additional_discovery,https://www.immobiliare.it/annunci/133503226/,,,,,new_source_review
+N43,additional_discovery,https://www.immobiliare.it/annunci/46513995/,,,,,new_source_review
+N44,additional_discovery,https://www.immobiliare.it/annunci/60465620/,,,,,new_source_review
+N45,additional_discovery,https://www.immobiliare.it/annunci/63602620/,,,,,new_source_review
+N46,additional_discovery,https://www.immobiliare.it/annunci/66127141/,,,,,new_source_review
+N47,additional_discovery,https://www.immobiliare.it/annunci/80809441/,,,,,new_source_review
+N48,additional_discovery,https://www.immobiliare.it/annunci/83959310/,,,,,new_source_review
+N49,additional_discovery,https://www.immobiliare.it/annunci/85804002/,,,,,new_source_review
+N50,additional_discovery,https://www.immobiliare.it/annunci/97303778/,,,,,new_source_review
+N51,additional_discovery,https://www.subito.it/appartamenti/2-locali-a-bergamo-bergamo-653032788.htm,,,,,new_source_review
+N52,additional_discovery,https://www.subito.it/appartamenti/2-locali-a-bergamo-bergamo-660286982.htm,,,,,new_source_review
+N53,additional_discovery,https://www.subito.it/appartamenti/2-locali-a-bergamo-bergamo-663707911.htm,,,,,new_source_review
+N54,additional_discovery,https://www.subito.it/appartamenti/bilocale-piazzetta-santo-spirito-bergamo-bergamo-663229251.htm,,,,,new_source_review
+N55,additional_discovery,https://www.wikicasa.it/annuncio/31008084,,,,,new_source_review

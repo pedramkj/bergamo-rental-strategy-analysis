@@ -11,19 +11,31 @@ Supply and geography	4
 Monthly allocation and its limits	8
 Neighborhood differences	8
 4 The long-term rental comparison	9
-Long-term cash assumptions	9
-Rental listing methodology and verification	10
-5 Revenue, Costs and Net Cash Income	11
-Fixed-cost budget and uncertainty	12
-Regulatory feasibility	13
-6 Sensitivity and preparation costs	13
-Break-even and calculation checks	13
-Long-term rent and differential-cost sensitivity	14
-Additional preparation changes the threshold	15
-7 Research methodology and challenges	16
-Reproducibility and review	16
-8 Conclusions and limitations	17
-Supported findings	17
-Unresolved evidence	17
-References	18
-Appendix A Rental registry audit	21
+Study scope and comparable-property criteria	9
+Candidate reconciliation and property identity	10
+Price normalisation and research corrections	11
+Primary and secondary rental statistics	11
+Rental distribution and comparable offers	12
+Independent benchmarks and measurement differences	13
+Historical and evidence-informed financial scenarios	14
+Updated sensitivity and break-even thresholds	15
+Conversion thresholds under the new rent	16
+5 Revenue, Costs and Net Cash Income	17
+Fixed-cost budget and uncertainty	18
+Regulatory feasibility	19
+6 Sensitivity and preparation costs	19
+Break-even and calculation checks	19
+Long-term rent and differential-cost sensitivity	20
+Additional preparation changes the threshold	21
+7 Research methodology and challenges	22
+Reproducibility and review	22
+8 Conclusions and limitations	23
+Supported findings	23
+Unresolved evidence	23
+References	24
+Appendix A Rental registry audit	27
+Appendix B Complete rental candidate reconciliation	28
+Original C records	28
+Preliminary A leads	29
+Additional N advertisements	29
+Rental evidence references	32

@@ -1,0 +1,15 @@
+left_candidate,right_candidate,decision,evidence,review_date
+C13,A05,confirmed_duplicate,Exact recovered advertisement120078316; TorquatoTasso75 and EUR850 match. One source record appears in both input sets.,2026-10-14
+A02,N53,confirmed_duplicate,"Same78m2 first-floor SantOrsola25 apartment,unique narrative,agency and4+4 conditions across two platforms. Headline prices850/900 disagree; cluster excluded until reconciled.",2026-10-14
+C20,N22,probable_duplicate,"Borfuro9,second floor,restored furnishing,annual-renewable wording and110fees agree.50/55m2 and1200/1000prices differ. No definitive unit/photo identity; no merge.",2026-10-14
+A08,C20,probable_duplicate,"Preliminary street9 and1000price match, but the lead lacks floor/size/URL. Exact property identity not established.",2026-10-14
+A09,C17,probable_duplicate,Frizzoni8 and mid-term offer family may overlap; lead1200 versus source1400 and no unit-level attributes. No merge.,2026-10-14
+A18,N17,probable_duplicate,Same SantAlessandro22 but lead60m2/900 differs from verified65m2/1200 first-floor transitory advertisement. Lead unresolved.,2026-10-14
+N37,N40,probable_duplicate,"Same third-floor65m2 Camozzi complex,agency,layout,energy rating and date;1550 includes parking versus1400 plus optional150. Could be one property, not two independent observations; both excluded.",2026-10-14
+A07,A12,distinct_property,"Recovered Zambianchi3:40m2,versus Zambianchi2:70m2. Different civic numbers,advertisement IDs and layouts; no merge.",2026-10-14
+A01,A02,distinct_property,"SantOrsola2 third-floor50m2 versus SantOrsola25 first-floor78m2; different civic numbers,floors and layouts.",2026-10-14
+A16,C19,unresolved_identity,Pontida11 lead versus historical Calepio/BorgoPalazzo offer; both direct sources inaccessible. No evidence to merge them or any900price-only match.,2026-10-14
+A13,C05,distinct_property,Broseta44:first floor42m2 versus Broseta43:fourth-floor48m2. Shared serviced operator/price family does not identify the same apartment.,2026-10-14
+A15,N12,unresolved_identity,"Generic40m2/800Centro lead could match an expired adjacent-VittorioEmanuele advertisement, but no exact address or original URL verifies linkage.",2026-10-14
+A19,N55,probable_duplicate,"Garibaldi6,size74,rent850 match syndicated cached lead. Original Idealista URL unavailable and Wikicasa detail410Gone; no confirmation of current property/availability.",2026-10-14
+C06,C20,distinct_property,Quarenghi32 fourth-floor55m2 versus Borfuro9 second-floor55m2. Historical price overlap alone did not establish duplication.,2026-10-14

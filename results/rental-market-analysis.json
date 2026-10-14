@@ -1,0 +1,372 @@
+{
+  "observation_date": "2026-10-14",
+  "method": "Manual online rental listing review",
+  "geography_rule": "Comune di Bergamo; source label Centro or Sant'Alessandro or explicitly named Piazzetta Santo Spirito. Portal-label study selection, not an official cadastral boundary. Conflicting location excluded.",
+  "counts": {
+    "original_candidates": 21,
+    "assistant_leads": 20,
+    "additional_candidates": 55,
+    "total_candidates": 96,
+    "distinct_source_urls": 89,
+    "canonical_groups_including_unresolved": 94,
+    "unique_physical_properties_total": null,
+    "confirmed_duplicate_clusters": 2,
+    "confirmed_duplicate_rows_removed": 2,
+    "probable_duplicate_review_pairs": 6,
+    "primary_properties": 14,
+    "secondary_properties": 11,
+    "excluded_canonical_groups": 69,
+    "unresolved_candidate_rows": 18,
+    "primary_origins": {
+      "assistant_20": 2,
+      "original_21": 2,
+      "additional_discovery": 10
+    },
+    "verified_advertisement_groups_no_probable_match": 69,
+    "primary_candidate_rows": 15,
+    "secondary_candidate_rows": 11,
+    "excluded_candidate_rows": 70
+  },
+  "raw_original_numeric": {
+    "n": 17,
+    "total": 17240.0,
+    "mean": 1014.1176470588235,
+    "median": 1000.0,
+    "sd": 216.248087376785,
+    "min": 700.0,
+    "max": 1400.0,
+    "q1": 850.0,
+    "q3": 1200.0,
+    "iqr": 350.0
+  },
+  "raw_assistant_leads": {
+    "n": 20,
+    "total": 17185.0,
+    "mean": 859.25,
+    "median": 850.0,
+    "sd": 112.04175678361123,
+    "min": 650.0,
+    "max": 1200.0,
+    "q1": 800.0,
+    "q3": 900.0,
+    "iqr": 100.0
+  },
+  "primary": {
+    "n": 14,
+    "total": 12520.0,
+    "mean": 894.2857142857143,
+    "median": 850.0,
+    "sd": 180.58512954002887,
+    "min": 650.0,
+    "max": 1200.0,
+    "q1": 755.0,
+    "q3": 987.5,
+    "iqr": 232.5
+  },
+  "secondary": {
+    "n": 11,
+    "total": 10770.0,
+    "mean": 979.0909090909091,
+    "median": 900.0,
+    "sd": 227.39633002555453,
+    "min": 700.0,
+    "max": 1500.0,
+    "q1": 825.0,
+    "q3": 1110.0,
+    "iqr": 285.0
+  },
+  "primary_price_per_advertised_m2": {
+    "n": 14,
+    "total": 241.01258752406528,
+    "mean": 17.21518482314752,
+    "median": 18.480392156862745,
+    "sd": 3.298968351633317,
+    "min": 11.846153846153847,
+    "max": 22.22222222222222,
+    "q1": 14.583333333333334,
+    "q3": 18.97222222222222,
+    "iqr": 4.3888888888888875
+  },
+  "exclusion_reason_counts": {
+    "conflicting_cluster_price": 1,
+    "not_verified_fully_furnished": 24,
+    "conflicting_location": 1,
+    "outside_or_unresolved_selected_area": 33,
+    "base_rent_unresolved": 28,
+    "serviced_or_bundled": 13,
+    "temporary_contract": 22,
+    "not_verified_one_bedroom": 20,
+    "probable_duplicate": 4,
+    "serviced": 1,
+    "outside_secondary_size_range": 2,
+    "conflicting_features": 1,
+    "source_unresolved_or_historical": 19,
+    "wrong_property": 1
+  },
+  "primary_neighborhood_breakdown": {
+    "Centro": {
+      "n": 13,
+      "total": 11670.0,
+      "mean": 897.6923076923077,
+      "median": 850.0,
+      "sd": 187.49017068252965,
+      "min": 650.0,
+      "max": 1200.0,
+      "q1": 750.0,
+      "q3": 1000.0,
+      "iqr": 250.0
+    },
+    "Piazzetta Santo Spirito": {
+      "n": 1,
+      "total": 850.0,
+      "mean": 850.0,
+      "median": 850.0,
+      "sd": null,
+      "min": 850.0,
+      "max": 850.0,
+      "q1": 850.0,
+      "q3": 850.0,
+      "iqr": 0.0
+    }
+  },
+  "primary_contract_breakdown": {
+    "4+4": 14
+  },
+  "primary_source_breakdown": {
+    "Immobiliare.it": 13,
+    "Subito": 1
+  },
+  "historical_900_scenario": {
+    "monthly_base_rent": 900,
+    "annual_gross": 10800,
+    "str_net": 6544.500000000002,
+    "ltr_net": 6732.0,
+    "gap": -187.49999999999818,
+    "break_even": [
+      {
+        "setup": 0,
+        "exact_nights": 183.53606789250352,
+        "minimum_whole_nights": 184,
+        "required_nightly_price": 116.64041994750656
+      },
+      {
+        "setup": 5000,
+        "exact_nights": 202.39509665252237,
+        "minimum_whole_nights": 203,
+        "required_nightly_price": 125.38932633420822
+      },
+      {
+        "setup": 10000,
+        "exact_nights": 221.25412541254124,
+        "minimum_whole_nights": 222,
+        "required_nightly_price": 134.13823272090988
+      },
+      {
+        "setup": 15000,
+        "exact_nights": 240.1131541725601,
+        "minimum_whole_nights": 241,
+        "required_nightly_price": 142.88713910761155
+      }
+    ],
+    "ltr_vacancy": [
+      {
+        "paid_months": 10,
+        "ltr_net": 5310.0
+      },
+      {
+        "paid_months": 11,
+        "ltr_net": 6021.0
+      },
+      {
+        "paid_months": 12,
+        "ltr_net": 6732.0
+      }
+    ],
+    "differential_cost_sensitivity": [
+      {
+        "str_additional_fixed": 600,
+        "gap": 412.5000000000018
+      },
+      {
+        "str_additional_fixed": 1200,
+        "gap": -187.49999999999818
+      },
+      {
+        "str_additional_fixed": 1800,
+        "gap": -787.4999999999982
+      }
+    ]
+  },
+  "evidence_informed_scenario": {
+    "monthly_base_rent": 894.2857142857143,
+    "annual_gross": 10731.428571428572,
+    "str_net": 6544.500000000002,
+    "ltr_net": 6677.828571428572,
+    "gap": -133.32857142857029,
+    "break_even": [
+      {
+        "setup": 0,
+        "exact_nights": 182.51444736310364,
+        "minimum_whole_nights": 183,
+        "required_nightly_price": 116.16647919010126
+      },
+      {
+        "setup": 5000,
+        "exact_nights": 201.37347612312251,
+        "minimum_whole_nights": 202,
+        "required_nightly_price": 124.91538557680289
+      },
+      {
+        "setup": 10000,
+        "exact_nights": 220.23250488314136,
+        "minimum_whole_nights": 221,
+        "required_nightly_price": 133.66429196350455
+      },
+      {
+        "setup": 15000,
+        "exact_nights": 239.09153364316023,
+        "minimum_whole_nights": 240,
+        "required_nightly_price": 142.41319835020622
+      }
+    ],
+    "ltr_vacancy": [
+      {
+        "paid_months": 10,
+        "ltr_net": 5264.857142857143
+      },
+      {
+        "paid_months": 11,
+        "ltr_net": 5971.342857142858
+      },
+      {
+        "paid_months": 12,
+        "ltr_net": 6677.828571428572
+      }
+    ],
+    "differential_cost_sensitivity": [
+      {
+        "str_additional_fixed": 600,
+        "gap": 466.6714285714297
+      },
+      {
+        "str_additional_fixed": 1200,
+        "gap": -133.32857142857029
+      },
+      {
+        "str_additional_fixed": 1800,
+        "gap": -733.3285714285703
+      }
+    ]
+  },
+  "rent_sensitivity": [
+    {
+      "monthly_rent": 700,
+      "ltr_net": 4836.0,
+      "gap": 1708.5000000000018
+    },
+    {
+      "monthly_rent": 800,
+      "ltr_net": 5784.0,
+      "gap": 760.5000000000018
+    },
+    {
+      "monthly_rent": 894.2857142857143,
+      "ltr_net": 6677.828571428572,
+      "gap": -133.32857142857029
+    },
+    {
+      "monthly_rent": 900,
+      "ltr_net": 6732.0,
+      "gap": -187.49999999999818
+    },
+    {
+      "monthly_rent": 1000,
+      "ltr_net": 7680.0,
+      "gap": -1135.4999999999982
+    },
+    {
+      "monthly_rent": 1100,
+      "ltr_net": 8628.0,
+      "gap": -2083.499999999998
+    }
+  ],
+  "str_price_booking_sensitivity": [
+    {
+      "booked_nights": 150,
+      "gross_nightly_eur": 100,
+      "str_net": 3525.0
+    },
+    {
+      "booked_nights": 150,
+      "gross_nightly_eur": 115,
+      "str_net": 4953.750000000001
+    },
+    {
+      "booked_nights": 150,
+      "gross_nightly_eur": 130,
+      "str_net": 6382.5
+    },
+    {
+      "booked_nights": 180,
+      "gross_nightly_eur": 100,
+      "str_net": 4830.0
+    },
+    {
+      "booked_nights": 180,
+      "gross_nightly_eur": 115,
+      "str_net": 6544.500000000002
+    },
+    {
+      "booked_nights": 180,
+      "gross_nightly_eur": 130,
+      "str_net": 8259.0
+    },
+    {
+      "booked_nights": 210,
+      "gross_nightly_eur": 100,
+      "str_net": 6135.0
+    },
+    {
+      "booked_nights": 210,
+      "gross_nightly_eur": 115,
+      "str_net": 8135.250000000002
+    },
+    {
+      "booked_nights": 210,
+      "gross_nightly_eur": 130,
+      "str_net": 10135.5
+    }
+  ],
+  "limitations": [
+    "Convenience sample, not a representative city market average.",
+    "Source content may be indexed or cached. Apartment availability and signed contract rents are not verified.",
+    "Complete physical-property count remains unknown for unresolved leads and probable duplicates.",
+    "Advertised surface measures differ from net OMI surfaces and may include weighted outdoor/accessory areas.",
+    "Amenity and parking differences remain; no causal adjustment estimated.",
+    "Fewer than20 strict comparables is reported without weakening criteria."
+  ],
+  "secondary_contract_breakdown": {
+    "duration_unspecified": 7,
+    "4+4": 4
+  },
+  "secondary_source_breakdown": {
+    "Immobiliare.it": 11
+  },
+  "candidate_contract_breakdown": {
+    "4+4": 33,
+    "temporary": 10,
+    "mid_term": 11,
+    "duration_unspecified": 32,
+    "annual_renewable": 2,
+    "concordato": 1,
+    "unresolved": 6,
+    "temporary_or_3+2": 1
+  },
+  "candidate_source_breakdown": {
+    "Immobiliare.it": 77,
+    "Idealista": 6,
+    "Subito": 6,
+    "unresolved": 6,
+    "Wikicasa": 1
+  }
+}

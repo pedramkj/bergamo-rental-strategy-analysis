@@ -5,5 +5,12 @@
   "encoding": "canonical JSON with sorted keys and compact separators",
   "listing_records_sha256": "fbc15f6035bbbc82bfa2273bde15f75e28f24cd80d0f56b9906e68635912651b",
   "methodology_review_date": "2026-10-14",
-  "rent_baseline_evidence_status": "900 EUR/month remains a scenario assumption; the 21-record city-centre arithmetic mean is not verified"
+  "rent_baseline_evidence_status": "Historical EUR 900 scenario preserved; separate evidence-informed scenario uses the unrounded 14-property primary mean.",
+  "rental_input_sha256": {
+    "data/rental/candidate-register.csv": "1c19842f13a2b53d982512f612ae4c8644393823cfe3de62f2228e6c4511a824",
+    "data/rental/source-observations.csv": "0676a7a90803f4b01d4050b8757698fdabad5e3fce985817edee179d03bfda1d",
+    "data/rental/deduplication-decisions.csv": "8878d3726cf62ff8995de0434c703cf987d141dec0657b7c817f93b49b5a2ee8",
+    "data/rental/market-benchmarks.csv": "2a62a85a367c3d93004e9bff7332c1d272ce4159f978bca453480fd6d74b76ba"
+  },
+  "rental_reconstruction_date": "2026-10-14"
 }

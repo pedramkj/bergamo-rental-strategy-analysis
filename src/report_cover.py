@@ -71,6 +71,9 @@ def add_cover(document):
     for target in [cover.header._element,cover.footer._element]:
         for element in list(target):target.remove(element)
         target.append(OxmlElement('w:p'))
+    # Keep the clickable author header on the unnumbered cover as well.
+    for element in list(cover.header._element):cover.header._element.remove(element)
+    for element in header:cover.header._element.append(deepcopy(element))
     body.page_width=Mm(210);body.page_height=Mm(297)
     body.top_margin=body.bottom_margin=Inches(.7);body.left_margin=body.right_margin=Inches(.8)
     page_number=OxmlElement('w:pgNumType');page_number.set(qn('w:start'),'1');body._sectPr.append(page_number)
