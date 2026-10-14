@@ -1,0 +1,6 @@
+{
+  "json_documents_validated": 144,
+  "schema_issues": [],
+  "source": "Microsoft public PBIP/PBIR JSON schemas",
+  "note": "Schema checks are separate from Desktop load, refresh, DAX execution and visual QA."
+}

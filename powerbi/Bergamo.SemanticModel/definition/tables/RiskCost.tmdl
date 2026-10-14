@@ -1,0 +1,12 @@
+table RiskCost
+
+	column Value
+		dataType: double
+		summarizeBy: none
+		sourceColumn: Value
+		formatString: #,0
+
+	partition RiskCost = m
+		mode: import
+		source =
+			#table(type table [Value=number], {{600},{1200},{1800}})

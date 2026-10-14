@@ -8,6 +8,22 @@ This independent Data Analytics portfolio project joins official tourism and BGY
 
 <a href="reports/Bergamo_Rental_Strategies_Complete_EN_v03.pdf"><img src="figures/report-cover.png" width="240" alt="More Tourists More Profit report cover"></a>
 
+## Interactive Power BI dashboard
+
+Five native pages connect the screened rental evidence, tourism/BGY context and
+an investment simulator with 12 working What-if controls. The design uses the
+approved carousel's extracted palette and Aptos typography.
+
+[**Open the PBIX**](powerbi/Bergamo.pbix) · [PBIP source](powerbi/Bergamo.pbip) ·
+[Setup and usage](powerbi/README.md) · [Validation evidence](powerbi/validation/QA.md)
+
+![Actual Power BI executive overview](powerbi/previews/01-overview.png)
+
+Validated in Power BI Desktop: 19 DAX scenarios, 114 numerical/blank checks,
+all five pages reviewed, native parameter/reset/filter/navigation interactions
+exercised. The imported PBIX works without a data refresh; configure the
+`RepositoryRoot` parameter before refreshing on another machine.
+
 ## Read the project
 
 - [Full research report PDF](reports/Bergamo_Rental_Strategies_Complete_EN_v03.pdf) and [editable Word report](reports/Bergamo_Rental_Strategies_Complete_EN_v03.docx)
@@ -79,7 +95,7 @@ Official OMI B2 civil-dwelling ranges, read from the interactive table, are **�
 
 ## Reproduce
 
-Core computations and all 45 tests use Python's standard library:
+Core computations and all 50 tests use Python's standard library:
 
 ```sh
 python src/analysis.py

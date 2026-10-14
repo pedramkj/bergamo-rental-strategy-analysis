@@ -1,0 +1,12 @@
+table RiskADR
+
+	column Value
+		dataType: double
+		summarizeBy: none
+		sourceColumn: Value
+		formatString: #,0
+
+	partition RiskADR = m
+		mode: import
+		source =
+			#table(type table [Value=number], {{100},{115},{130}})

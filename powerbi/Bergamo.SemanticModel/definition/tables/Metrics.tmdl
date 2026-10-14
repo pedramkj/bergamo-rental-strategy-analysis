@@ -1,0 +1,251 @@
+table Metrics
+
+	column _
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: _
+
+	measure 'BookedNights' =
+			SELECTEDVALUE(PBookedNights[Value], MAX(Assumptions[booked_nights]))
+		formatString: #,0
+
+	measure 'ADR' =
+			SELECTEDVALUE(PADR[Value], MAX(Assumptions[gross_nightly_eur]))
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'LTRRent' =
+			SELECTEDVALUE(PLTRRent[Value], [Primary Mean All])
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'HostFee' =
+			SELECTEDVALUE(PHostFee[Value], MAX(Assumptions[host_fee]))
+		formatString: 0.0%
+
+	measure 'Tax' =
+			SELECTEDVALUE(PTax[Value], MAX(Assumptions[tax]))
+		formatString: 0.0%
+
+	measure 'Cleaning' =
+			SELECTEDVALUE(PCleaning[Value], MAX(Assumptions[cleaning_per_turnover]))
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Stay' =
+			SELECTEDVALUE(PStay[Value], MAX(Assumptions[stay_nights]))
+		formatString: 0.0
+
+	measure 'VariableCost' =
+			SELECTEDVALUE(PVariableCost[Value], MAX(Assumptions[other_variable_per_night]))
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'STRFixed' =
+			SELECTEDVALUE(PSTRFixed[Value], MAX(Assumptions[common_fixed]) + MAX(Assumptions[str_incremental_fixed]))
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'LTRFixed' =
+			SELECTEDVALUE(PLTRFixed[Value], MAX(Assumptions[common_fixed]))
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'PaidMonths' =
+			SELECTEDVALUE(PPaidMonths[Value], MAX(Assumptions[paid_months]))
+		formatString: 0
+
+	measure 'Preparation' =
+			SELECTEDVALUE(PPreparation[Value], 0)
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Primary Count' =
+			COALESCE(CALCULATE(COUNTROWS(Listings), KEEPFILTERS(Listings[Cohort] = "primary")), 0)
+		formatString: #,0
+
+	measure 'Primary Mean' =
+			CALCULATE(AVERAGE(Listings[Rent]), KEEPFILTERS(Listings[Cohort] = "primary"))
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Primary Median' =
+			CALCULATE(MEDIAN(Listings[Rent]), KEEPFILTERS(Listings[Cohort] = "primary"))
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Primary Mean All' =
+			CALCULATE(AVERAGE(Listings[Rent]), REMOVEFILTERS(Listings), Listings[Cohort] = "primary")
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Mean EUR per m2' =
+			CALCULATE(AVERAGE(Listings[RentPerM2]), KEEPFILTERS(Listings[Cohort] = "primary"))
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Candidate Count' =
+			CALCULATE(COUNTROWS(Candidates), REMOVEFILTERS(Candidates), REMOVEFILTERS(Listings))
+		formatString: #,0
+
+	measure 'Primary Count All' =
+			CALCULATE(COUNTROWS(Listings), REMOVEFILTERS(Listings), Listings[Cohort] = "primary")
+		formatString: #,0
+
+	measure 'Secondary Count All' =
+			CALCULATE(COUNTROWS(Listings), REMOVEFILTERS(Listings), Listings[Cohort] = "secondary")
+		formatString: #,0
+
+	measure 'Excluded Count All' =
+			CALCULATE(COUNTROWS(Listings), REMOVEFILTERS(Listings), Listings[Cohort] = "excluded")
+		formatString: #,0
+
+	measure 'Rent Band Count' =
+			VAR LowerBound = SELECTEDVALUE(RentBands[Lower]) RETURN CALCULATE(COUNTROWS(Listings), KEEPFILTERS(Listings[Cohort] = "primary"), KEEPFILTERS(Listings[Rent] >= LowerBound), KEEPFILTERS(Listings[Rent] < LowerBound + 100))
+		formatString: #,0
+
+	measure 'STR Net' =
+			[BookedNights] * [ADR] * (1 - [HostFee] - [Tax]) - DIVIDE([BookedNights] * [Cleaning], [Stay]) - [BookedNights] * [VariableCost] - [STRFixed]
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'LTR Net' =
+			[PaidMonths] * [LTRRent] * (1 - [Tax]) - [LTRFixed]
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Annual Difference' =
+			[STR Net] - [LTR Net]
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Night Contribution' =
+			[ADR] * (1 - [HostFee] - [Tax]) - DIVIDE([Cleaning], [Stay]) - [VariableCost]
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Break-even Nights' =
+			VAR Target = [LTR Net] + [STRFixed] + DIVIDE([Preparation],MAX(Assumptions[recovery_years])) RETURN IF([Night Contribution] > 0, MAX(0,ROUNDUP(DIVIDE(Target,[Night Contribution]),0)), BLANK())
+		formatString: #,0
+
+	measure 'Break-even ADR' =
+			VAR Margin = 1 - [HostFee] - [Tax] RETURN IF([BookedNights] > 0 && Margin > 0, DIVIDE(DIVIDE([LTR Net] + [STRFixed] + DIVIDE([Preparation],MAX(Assumptions[recovery_years])),[BookedNights]) + DIVIDE([Cleaning],[Stay]) + [VariableCost],Margin),BLANK())
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Break-even LTR Rent' =
+			IF([PaidMonths] > 0 && [Tax] < 1, DIVIDE([STR Net] + [LTRFixed], [PaidMonths] * (1 - [Tax])), BLANK())
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Strategy Net' =
+			SWITCH(SELECTEDVALUE(Strategy[Name]), "Short-term", [STR Net], "Long-term", [LTR Net])
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'STR Comparison' =
+			IF(SELECTEDVALUE(Strategy[Name]) = "Short-term", [STR Net])
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'LTR Comparison' =
+			IF(SELECTEDVALUE(Strategy[Name]) = "Long-term", [LTR Net])
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Historical LTR' =
+			MAX(Assumptions[paid_months])*MAX(Assumptions[long_monthly])*(1-MAX(Assumptions[tax]))-MAX(Assumptions[common_fixed])
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Historical STR' =
+			MAX(Assumptions[booked_nights])*MAX(Assumptions[gross_nightly_eur])*(1-MAX(Assumptions[host_fee])-MAX(Assumptions[tax]))-DIVIDE(MAX(Assumptions[booked_nights])*MAX(Assumptions[cleaning_per_turnover]),MAX(Assumptions[stay_nights]))-MAX(Assumptions[booked_nights])*MAX(Assumptions[other_variable_per_night])-MAX(Assumptions[common_fixed])-MAX(Assumptions[str_incremental_fixed])
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Decision' =
+			VAR Gap=[Annual Difference] RETURN IF(ABS(Gap)<500, "Narrow scenario gap", IF(Gap>0,"STR leads / scenario","LTR leads / scenario"))
+		formatString: General
+
+	measure 'Empty Sample' =
+			IF(ISBLANK([Primary Mean]), "No primary comparables match these filters.", "Selected primary comparables; asking rents, not signed contracts.")
+		formatString: General
+
+	measure 'Guest Nights' =
+			SUM(Tourism[GuestNights])
+		formatString: #,0
+
+	measure 'Airport Passengers' =
+			SUM(Tourism[Passengers])
+		formatString: #,0
+
+	measure 'Guest Nights Index' =
+			DIVIDE([Guest Nights],CALCULATE([Guest Nights],REMOVEFILTERS(Tourism),Tourism[Year]=2019))*100
+		formatString: 0.0
+
+	measure 'Airport Index' =
+			DIVIDE([Airport Passengers],CALCULATE([Airport Passengers],REMOVEFILTERS(Tourism),Tourism[Year]=2019))*100
+		formatString: 0.0
+
+	measure 'Guest Nights YoY' =
+			VAR Y=SELECTEDVALUE(Tourism[Year]) VAR Prev=CALCULATE([Guest Nights],REMOVEFILTERS(Tourism),Tourism[Year]=Y-1) RETURN IF(NOT ISBLANK(Prev),DIVIDE([Guest Nights]-Prev,Prev))
+		formatString: 0.0%;(0.0%)
+
+	measure 'Airport YoY' =
+			VAR Y=SELECTEDVALUE(Tourism[Year]) VAR Prev=CALCULATE([Airport Passengers],REMOVEFILTERS(Tourism),Tourism[Year]=Y-1) RETURN IF(NOT ISBLANK(Prev),DIVIDE([Airport Passengers]-Prev,Prev))
+		formatString: 0.0%;(0.0%)
+
+	measure 'Heatmap Gap' =
+			VAR N=SELECTEDVALUE(RiskNights[Value]) VAR Price=SELECTEDVALUE(RiskADR[Value]) RETURN N*Price*(1-[HostFee]-[Tax])-N*(DIVIDE([Cleaning],[Stay])+[VariableCost])-[STRFixed]-[LTR Net]
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Heatmap Color' =
+			IF(SELECTEDVALUE(RiskNights[Value])=MAX(Assumptions[booked_nights]) && SELECTEDVALUE(RiskADR[Value])=MAX(Assumptions[gross_nightly_eur]),"#C6A46C",IF([Heatmap Gap]>0,"#ADCDD2","#DBE5EA"))
+		formatString: General
+
+	measure 'Rent Sensitivity' =
+			[STR Net] - (MAX(Assumptions[paid_months])*SELECTEDVALUE(RiskRent[Value])*(1-[Tax])-[LTRFixed])
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Cost Sensitivity' =
+			[STR Net] + MAX(Assumptions[str_incremental_fixed]) - SELECTEDVALUE(RiskCost[Value]) - [LTR Net]
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Frontier ADR' =
+			VAR N=SELECTEDVALUE(RiskNights[Value]) RETURN DIVIDE(DIVIDE([LTR Net]+[STRFixed],N)+DIVIDE([Cleaning],[Stay])+[VariableCost],1-[HostFee]-[Tax])
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	measure 'Setup Nights' =
+			VAR Target=[LTR Net]+[STRFixed]+DIVIDE(SELECTEDVALUE(Setup[Value]),MAX(Assumptions[recovery_years])) RETURN IF([Night Contribution]>0,ROUNDUP(DIVIDE(Target,[Night Contribution]),0))
+		formatString: #,0
+
+	measure 'Screening Summary' =
+			FORMAT(MAX(Audit[total_candidates]),"0") & " candidates · " & FORMAT(MAX(Audit[canonical_groups_including_unresolved]),"0") & " record groups · " & FORMAT(MAX(Audit[confirmed_duplicate_clusters]),"0") & " duplicate clusters · " & FORMAT(MAX(Audit[probable_duplicate_review_pairs]),"0") & " probable pairs · " & FORMAT(MAX(Audit[primary_properties]),"0") & " primary / " & FORMAT(MAX(Audit[secondary_properties]),"0") & " secondary / " & FORMAT(MAX(Audit[excluded_canonical_groups]),"0") & " excluded. Physical total unknown."
+		formatString: General
+
+	measure 'Risk Case Labels' =
+			"Conservative " & FORMAT(MIN(RiskNights[Value]),"0") & " nights × " & FORMAT(MIN(RiskADR[Value]),"€0") & " | Baseline " & FORMAT(MAX(Assumptions[booked_nights]),"0") & " × " & FORMAT(MAX(Assumptions[gross_nightly_eur]),"€0") & " | Optimistic " & FORMAT(MAX(RiskNights[Value]),"0") & " × " & FORMAT(MAX(RiskADR[Value]),"€0") & ". Stress cases, not forecasts."
+		formatString: General
+
+	measure 'STR Net Display' =
+			IF(NOT ISBLANK([STR Net]), FORMAT([STR Net], "€#,0.00;(€#,0.00);€0.00"), "Not defined")
+		formatString: General
+
+	measure 'LTR Net Display' =
+			IF(NOT ISBLANK([LTR Net]), FORMAT([LTR Net], "€#,0.00;(€#,0.00);€0.00"), "Not defined")
+		formatString: General
+
+	measure 'Annual Difference Display' =
+			IF(NOT ISBLANK([Annual Difference]), FORMAT([Annual Difference], "€#,0.00;(€#,0.00);€0.00"), "Not defined")
+		formatString: General
+
+	measure 'Primary Mean Display' =
+			IF(NOT ISBLANK([Primary Mean]), FORMAT([Primary Mean], "€#,0.00;(€#,0.00);€0.00"), "No matches")
+		formatString: General
+
+	measure 'Primary Median Display' =
+			IF(NOT ISBLANK([Primary Median]), FORMAT([Primary Median], "€#,0.00;(€#,0.00);€0.00"), "No matches")
+		formatString: General
+
+	measure 'Mean EUR per m2 Display' =
+			IF(NOT ISBLANK([Mean EUR per m2]), FORMAT([Mean EUR per m2], "€#,0.00;(€#,0.00);€0.00"), "No matches")
+		formatString: General
+
+	measure 'LTRRent Display' =
+			IF(NOT ISBLANK([LTRRent]), FORMAT([LTRRent], "€#,0.00;(€#,0.00);€0.00"), "Not defined")
+		formatString: General
+
+	measure 'ADR Display' =
+			IF(NOT ISBLANK([ADR]), FORMAT([ADR], "€#,0.00;(€#,0.00);€0.00"), "Not defined")
+		formatString: General
+
+	measure 'Break-even ADR Display' =
+			IF(NOT ISBLANK([Break-even ADR]), FORMAT([Break-even ADR], "€#,0.00;(€#,0.00);€0.00"), "Not defined")
+		formatString: General
+
+	measure 'Break-even LTR Rent Display' =
+			IF(NOT ISBLANK([Break-even LTR Rent]), FORMAT([Break-even LTR Rent], "€#,0.00;(€#,0.00);€0.00"), "Not defined")
+		formatString: General
+
+	partition Metrics = m
+		mode: import
+		source =
+			#table(type table [_=Int64.Type], {{0}})

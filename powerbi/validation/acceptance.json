@@ -1,0 +1,23 @@
+{
+  "baseline_commit": "f53e659a98b110904498613ff4b5e8beabfa212d",
+  "official_authoring_cli": "powerbi-report-author 0.5.0",
+  "native_desktop": "2.158.1304.0",
+  "errors": 0,
+  "warnings": 0,
+  "pages": 5,
+  "tables": 25,
+  "measures": 60,
+  "what_if_controls": 12,
+  "unit_tests": 50,
+  "actual_dax_cases": 19,
+  "actual_numeric_or_blank_checks": 114,
+  "protected_research_diff": "unchanged",
+  "public_pbix_sha256": "5af6f03f319689a1e7367336d2c7c54f5d8239652667c2c16d0a060b4f265d65",
+  "previews": {
+    "01-overview.png": "4fa69d49734292c7a84aa83e57aa9ad5a30051a672bfeefcd339581452629c8e",
+    "02-rental-market.png": "af6bc91e96aaa8cc185464fc4825461df42e754b89ddc555b4458ebbffc4f94a",
+    "03-simulator.png": "effb8272eec2de89942441925623ffd52929ff78431a8964df6f9b849c7d2f2f",
+    "04-tourism-context.png": "efc9745ee75db44b6a060da3504a04855129eb9583cb88c5e955278a5af85783",
+    "05-sensitivity.png": "a36c18abb98aa387b56ac8ef5f95fada317a1bc32f9b9fe3dde24e0d069f712b"
+  }
+}

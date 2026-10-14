@@ -1,0 +1,31 @@
+table Candidates
+
+	column CandidateID
+		dataType: string
+		summarizeBy: none
+		sourceColumn: candidate_id
+
+	column PropertyID
+		dataType: string
+		summarizeBy: none
+		sourceColumn: property_id
+
+	column Origin
+		dataType: string
+		summarizeBy: none
+		sourceColumn: origin
+
+	column Status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status
+
+	partition Candidates = m
+		mode: import
+		source =
+			let
+			 Source = Csv.Document(File.Contents(RepositoryRoot & "\data\rental\master-listing-registry.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+			 Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+			 Selected = Table.SelectColumns(Headers, {"candidate_id", "property_id", "origin", "status"}),
+			 Typed = Table.TransformColumnTypes(Selected, {{"candidate_id", type text}, {"property_id", type text}, {"origin", type text}, {"status", type text}}, "en-US")
+			in Typed

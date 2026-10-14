@@ -1,0 +1,13 @@
+table PVariableCost
+
+	column Value
+		dataType: double
+		summarizeBy: none
+		sourceColumn: [Value]
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+		extendedProperty ParameterMetadata = {"version":0}
+
+	partition PVariableCost = calculated
+		mode: import
+		source = GENERATESERIES(0, 40, 1)

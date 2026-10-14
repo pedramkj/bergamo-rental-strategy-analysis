@@ -1,0 +1,74 @@
+table Listings
+
+	column PropertyID
+		dataType: string
+		summarizeBy: none
+		sourceColumn: property_id
+
+	column Cohort
+		dataType: string
+		summarizeBy: none
+		sourceColumn: cohort
+
+	column Neighborhood
+		dataType: string
+		summarizeBy: none
+		sourceColumn: neighborhood
+
+	column Rent
+		dataType: double
+		summarizeBy: none
+		sourceColumn: base_monthly_eur
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	column Area
+		dataType: double
+		summarizeBy: none
+		sourceColumn: advertised_m2
+
+	column Contract
+		dataType: string
+		summarizeBy: none
+		sourceColumn: contract
+
+	column URL
+		dataType: string
+		summarizeBy: none
+		sourceColumn: url
+		dataCategory: WebUrl
+
+	column Platform
+		dataType: string
+		summarizeBy: none
+		sourceColumn: platform
+
+	column Status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status
+
+	column Location
+		dataType: string
+		summarizeBy: none
+		sourceColumn: location
+
+	column VerificationNotes
+		dataType: string
+		summarizeBy: none
+		sourceColumn: verification_notes
+
+	column RentPerM2
+		dataType: double
+		summarizeBy: none
+		sourceColumn: price_per_advertised_m2
+		formatString: €#,0.00;(€#,0.00);€0.00
+
+	partition Listings = m
+		mode: import
+		source =
+			let
+			 Source = Csv.Document(File.Contents(RepositoryRoot & "\data\rental\canonical-properties.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+			 Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+			 Selected = Table.SelectColumns(Headers, {"property_id", "cohort", "neighborhood", "base_monthly_eur", "advertised_m2", "contract", "url", "platform", "status", "location", "verification_notes", "price_per_advertised_m2"}),
+			 Typed = Table.TransformColumnTypes(Selected, {{"property_id", type text}, {"cohort", type text}, {"neighborhood", type text}, {"base_monthly_eur", type number}, {"advertised_m2", type number}, {"contract", type text}, {"url", type text}, {"platform", type text}, {"status", type text}, {"location", type text}, {"verification_notes", type text}, {"price_per_advertised_m2", type number}}, "en-US")
+			in Typed

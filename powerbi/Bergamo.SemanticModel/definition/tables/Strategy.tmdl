@@ -1,0 +1,11 @@
+table Strategy
+
+	column Name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Name
+
+	partition Strategy = m
+		mode: import
+		source =
+			#table(type table [Name=text], {{"Short-term"}, {"Long-term"}})

@@ -1,0 +1,296 @@
+{
+  "source_commit": "f53e659a98b110904498613ff4b5e8beabfa212d",
+  "defaults": {
+    "BookedNights": 180,
+    "ADR": 115,
+    "LTRRent": 894.2857142857143,
+    "HostFee": 0.155,
+    "Tax": 0.21,
+    "Cleaning": 30,
+    "Stay": 3,
+    "VariableCost": 10,
+    "STRFixed": 3000,
+    "LTRFixed": 1800,
+    "PaidMonths": 12,
+    "Preparation": 0
+  },
+  "cases": [
+    {
+      "name": "baseline",
+      "selections": {},
+      "expected": {
+        "STR": 6544.500000000002,
+        "LTR": 6677.828571428572,
+        "Gap": -133.32857142857029,
+        "Nights": 183,
+        "ADR": 116.16647919010126,
+        "LTRRent": 880.2215189873419
+      }
+    },
+    {
+      "name": "historical900",
+      "selections": {
+        "LTRRent": 900
+      },
+      "expected": {
+        "STR": 6544.500000000002,
+        "LTR": 6732.0,
+        "Gap": -187.49999999999818,
+        "Nights": 184,
+        "ADR": 116.64041994750656,
+        "LTRRent": 880.2215189873419
+      }
+    },
+    {
+      "name": "change_BookedNights",
+      "selections": {
+        "BookedNights": 210
+      },
+      "expected": {
+        "STR": 8135.250000000002,
+        "LTR": 6677.828571428572,
+        "Gap": 1457.4214285714297,
+        "Nights": 183,
+        "ADR": 104.07070544753336,
+        "LTRRent": 1048.0221518987344
+      }
+    },
+    {
+      "name": "change_ADR",
+      "selections": {
+        "ADR": 130
+      },
+      "expected": {
+        "STR": 8259.0,
+        "LTR": 6677.828571428572,
+        "Gap": 1581.171428571428,
+        "Nights": 155,
+        "ADR": 116.16647919010126,
+        "LTRRent": 1061.0759493670885
+      }
+    },
+    {
+      "name": "change_LTRRent",
+      "selections": {
+        "LTRRent": 1000
+      },
+      "expected": {
+        "STR": 6544.500000000002,
+        "LTR": 7680.0,
+        "Gap": -1135.4999999999982,
+        "Nights": 202,
+        "ADR": 124.93438320209975,
+        "LTRRent": 880.2215189873419
+      }
+    },
+    {
+      "name": "change_HostFee",
+      "selections": {
+        "HostFee": 0.2
+      },
+      "expected": {
+        "STR": 5613.000000000002,
+        "LTR": 6677.828571428572,
+        "Gap": -1064.8285714285703,
+        "Nights": 203,
+        "ADR": 125.02663438256658,
+        "LTRRent": 781.9620253164559
+      }
+    },
+    {
+      "name": "change_Tax",
+      "selections": {
+        "Tax": 0.25
+      },
+      "expected": {
+        "STR": 5716.5,
+        "LTR": 6248.571428571429,
+        "Gap": -532.0714285714294,
+        "Nights": 191,
+        "ADR": 119.96798719487795,
+        "LTRRent": 835.1666666666666
+      }
+    },
+    {
+      "name": "change_Cleaning",
+      "selections": {
+        "Cleaning": 45
+      },
+      "expected": {
+        "STR": 5644.500000000002,
+        "LTR": 6677.828571428572,
+        "Gap": -1033.3285714285703,
+        "Nights": 202,
+        "ADR": 124.04049493813275,
+        "LTRRent": 785.2848101265824
+      }
+    },
+    {
+      "name": "change_Stay",
+      "selections": {
+        "Stay": 2
+      },
+      "expected": {
+        "STR": 5644.500000000002,
+        "LTR": 6677.828571428572,
+        "Gap": -1033.3285714285703,
+        "Nights": 202,
+        "ADR": 124.04049493813275,
+        "LTRRent": 785.2848101265824
+      }
+    },
+    {
+      "name": "change_VariableCost",
+      "selections": {
+        "VariableCost": 15
+      },
+      "expected": {
+        "STR": 5644.500000000002,
+        "LTR": 6677.828571428572,
+        "Gap": -1033.3285714285703,
+        "Nights": 202,
+        "ADR": 124.04049493813275,
+        "LTRRent": 785.2848101265824
+      }
+    },
+    {
+      "name": "change_STRFixed",
+      "selections": {
+        "STRFixed": 4000
+      },
+      "expected": {
+        "STR": 5544.500000000002,
+        "LTR": 6677.828571428572,
+        "Gap": -1133.3285714285703,
+        "Nights": 202,
+        "ADR": 124.91538557680289,
+        "LTRRent": 774.7362869198314
+      }
+    },
+    {
+      "name": "change_LTRFixed",
+      "selections": {
+        "LTRFixed": 2500
+      },
+      "expected": {
+        "STR": 6544.500000000002,
+        "LTR": 5977.828571428572,
+        "Gap": 566.6714285714297,
+        "Nights": 170,
+        "ADR": 110.04224471941009,
+        "LTRRent": 954.0611814345993
+      }
+    },
+    {
+      "name": "change_PaidMonths",
+      "selections": {
+        "PaidMonths": 11
+      },
+      "expected": {
+        "STR": 6544.500000000002,
+        "LTR": 5971.342857142858,
+        "Gap": 573.1571428571442,
+        "Nights": 170,
+        "ADR": 109.98550181227347,
+        "LTRRent": 960.2416570771002
+      }
+    },
+    {
+      "name": "change_Preparation",
+      "selections": {
+        "Preparation": 15000
+      },
+      "expected": {
+        "STR": 6544.500000000002,
+        "LTR": 6677.828571428572,
+        "Gap": -133.32857142857029,
+        "Nights": 240,
+        "ADR": 142.41319835020622,
+        "LTRRent": 880.2215189873419
+      }
+    },
+    {
+      "name": "native_ADR50",
+      "selections": {
+        "ADR": 50
+      },
+      "expected": {
+        "STR": -885.0,
+        "LTR": 6677.828571428572,
+        "Gap": -7562.828571428572,
+        "Nights": 824,
+        "ADR": 116.16647919010126,
+        "LTRRent": 96.51898734177215
+      }
+    },
+    {
+      "name": "zero_paid_months",
+      "selections": {
+        "PaidMonths": 0
+      },
+      "expected": {
+        "STR": 6544.500000000002,
+        "LTR": -1800.0,
+        "Gap": 8344.500000000002,
+        "Nights": 23,
+        "ADR": 41.99475065616798,
+        "LTRRent": null
+      }
+    },
+    {
+      "name": "zero_bookings",
+      "selections": {
+        "BookedNights": 0
+      },
+      "expected": {
+        "STR": -3000.0,
+        "LTR": 6677.828571428572,
+        "Gap": -9677.828571428572,
+        "Nights": 183,
+        "ADR": null,
+        "LTRRent": -126.58227848101265
+      }
+    },
+    {
+      "name": "negative_night_contribution",
+      "selections": {
+        "ADR": 50,
+        "Cleaning": 100,
+        "Stay": 1,
+        "VariableCost": 40
+      },
+      "expected": {
+        "STR": -22485.0,
+        "LTR": 6677.828571428572,
+        "Gap": -29162.828571428574,
+        "Nights": null,
+        "ADR": 305.14285714285717,
+        "LTRRent": -2181.9620253164558
+      }
+    },
+    {
+      "name": "combined",
+      "selections": {
+        "BookedNights": 210,
+        "ADR": 130,
+        "Cleaning": 45,
+        "Stay": 4,
+        "HostFee": 0.2,
+        "Tax": 0.25,
+        "LTRRent": 1000,
+        "STRFixed": 4000,
+        "LTRFixed": 2000,
+        "PaidMonths": 11,
+        "Preparation": 15000
+      },
+      "expected": {
+        "STR": 6552.5,
+        "LTR": 6250.0,
+        "Gap": 302.5,
+        "Nights": 264,
+        "ADR": 153.35497835497836,
+        "LTRRent": 1036.6666666666667
+      }
+    }
+  ]
+}

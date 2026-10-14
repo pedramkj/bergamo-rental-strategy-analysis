@@ -1,0 +1,12 @@
+table Setup
+
+	column Value
+		dataType: double
+		summarizeBy: none
+		sourceColumn: Value
+		formatString: #,0
+
+	partition Setup = m
+		mode: import
+		source =
+			#table(type table [Value=number], {{0},{5000},{10000},{15000}})

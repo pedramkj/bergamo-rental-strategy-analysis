@@ -1,0 +1,122 @@
+{
+  "name": "BergamoTheme.json",
+  "dataColors": [
+    "#1C4C74",
+    "#32B8B2",
+    "#64798B",
+    "#C6A46C",
+    "#9CCACD"
+  ],
+  "background": "#F6F8FA",
+  "foreground": "#0D233A",
+  "tableAccent": "#32B8B2",
+  "good": "#32B8B2",
+  "neutral": "#C6A46C",
+  "bad": "#1C4C74",
+  "textClasses": {
+    "title": {
+      "fontFace": "Aptos",
+      "fontSize": 15,
+      "color": "#0D233A"
+    },
+    "label": {
+      "fontFace": "Aptos",
+      "fontSize": 10,
+      "color": "#64798B"
+    },
+    "callout": {
+      "fontFace": "Aptos",
+      "fontSize": 32,
+      "color": "#0D233A"
+    },
+    "header": {
+      "fontFace": "Aptos",
+      "fontSize": 12,
+      "color": "#0D233A"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ],
+        "visualHeader": [
+          {
+            "show": false
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "fontFamily": "Aptos",
+            "fontSize": 14,
+            "fontColor": "#0D233A"
+          }
+        ],
+        "padding": [
+          {
+            "top": 8,
+            "bottom": 8,
+            "left": 8,
+            "right": 8
+          }
+        ],
+        "visualTooltip": [
+          {
+            "show": true
+          }
+        ]
+      }
+    },
+    "slicer": {
+      "*": {
+        "header": [
+          {
+            "fontFamily": "Aptos",
+            "textSize": 10,
+            "fontColor": "#64798B"
+          }
+        ],
+        "items": [
+          {
+            "fontFamily": "Aptos",
+            "textSize": 11,
+            "fontColor": "#0D233A"
+          }
+        ]
+      }
+    },
+    "tableEx": {
+      "*": {
+        "columnHeaders": [
+          {
+            "fontFamily": "Aptos",
+            "fontSize": 10,
+            "fontColor": "#0D233A",
+            "backColor": "#DBE5EA"
+          }
+        ],
+        "values": [
+          {
+            "fontFamily": "Aptos",
+            "fontSize": 10,
+            "fontColor": "#0D233A"
+          }
+        ]
+      }
+    }
+  }
+}

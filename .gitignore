@@ -6,3 +6,7 @@ generated/
 .DS_Store
 Thumbs.db
 ~$*
+
+powerbi/**/.pbi/
+powerbi/**/.pbi
+powerbi/**/*.abf

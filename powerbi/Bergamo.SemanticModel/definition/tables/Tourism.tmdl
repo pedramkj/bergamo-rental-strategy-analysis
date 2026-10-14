@@ -1,0 +1,41 @@
+table Tourism
+
+	column Year
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: year
+
+	column Passengers
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: airport_passengers
+
+	column Arrivals
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: city_arrivals
+
+	column GuestNights
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: city_guest_nights
+
+	column AirportSource
+		dataType: string
+		summarizeBy: none
+		sourceColumn: airport_source
+		dataCategory: WebUrl
+
+	column CitySource
+		dataType: string
+		summarizeBy: none
+		sourceColumn: city_source
+
+	partition Tourism = m
+		mode: import
+		source =
+			let
+			 Source = Json.Document(File.Contents(RepositoryRoot & "\data\airport-city-annual.json")),
+			 Rows = Table.FromRecords(Source),
+			 Typed = Table.TransformColumnTypes(Rows, {{"year", Int64.Type},{"airport_passengers", Int64.Type},{"city_arrivals", Int64.Type},{"city_guest_nights", Int64.Type}})
+			in Typed

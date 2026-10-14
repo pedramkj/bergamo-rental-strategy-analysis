@@ -1,0 +1,49 @@
+table Audit
+
+	column total_candidates
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: total_candidates
+
+	column canonical_groups_including_unresolved
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: canonical_groups_including_unresolved
+
+	column confirmed_duplicate_clusters
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: confirmed_duplicate_clusters
+
+	column probable_duplicate_review_pairs
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: probable_duplicate_review_pairs
+
+	column primary_properties
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: primary_properties
+
+	column secondary_properties
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: secondary_properties
+
+	column excluded_canonical_groups
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: excluded_canonical_groups
+
+	column unresolved_candidate_rows
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: unresolved_candidate_rows
+
+	partition Audit = m
+		mode: import
+		source =
+			let
+			 Source = Json.Document(File.Contents(RepositoryRoot & "\results\rental-market-analysis.json")),
+			 Rows = Table.FromRecords({Source[counts]})
+			in Rows

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Bergamo Rental Strategies",
+    "description": "Reviewed evidence and conditional STR/LTR cash comparison."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "757363be-1da0-45b6-9cd8-39ca7197d258"
+  }
+}

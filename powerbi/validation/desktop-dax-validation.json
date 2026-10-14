@@ -1,0 +1,237 @@
+{
+  "case_count": 19,
+  "numerical_checks": 114,
+  "tolerance": 1E-06,
+  "cases": [
+    {
+      "case": "baseline",
+      "actual": {
+        "STR": 6544.5,
+        "LTR": 6677.828571428572,
+        "Gap": -133.3285714285721,
+        "Nights": 183.0,
+        "ADR": 116.16647919010126,
+        "LTRRent": 880.2215189873417
+      },
+      "status": "pass"
+    },
+    {
+      "case": "historical900",
+      "actual": {
+        "STR": 6544.5,
+        "LTR": 6732.0,
+        "Gap": -187.5,
+        "Nights": 184.0,
+        "ADR": 116.64041994750656,
+        "LTRRent": 880.2215189873417
+      },
+      "status": "pass"
+    },
+    {
+      "case": "change_BookedNights",
+      "actual": {
+        "STR": 8135.25,
+        "LTR": 6677.828571428572,
+        "Gap": 1457.421428571428,
+        "Nights": 183.0,
+        "ADR": 104.07070544753336,
+        "LTRRent": 1048.0221518987341
+      },
+      "status": "pass"
+    },
+    {
+      "case": "change_ADR",
+      "actual": {
+        "STR": 8259.0,
+        "LTR": 6677.828571428572,
+        "Gap": 1581.171428571428,
+        "Nights": 155.0,
+        "ADR": 116.16647919010126,
+        "LTRRent": 1061.0759493670885
+      },
+      "status": "pass"
+    },
+    {
+      "case": "change_LTRRent",
+      "actual": {
+        "STR": 6544.5,
+        "LTR": 7680.0,
+        "Gap": -1135.5,
+        "Nights": 202.0,
+        "ADR": 124.93438320209975,
+        "LTRRent": 880.2215189873417
+      },
+      "status": "pass"
+    },
+    {
+      "case": "change_HostFee",
+      "actual": {
+        "STR": 5613.000000000002,
+        "LTR": 6677.828571428572,
+        "Gap": -1064.8285714285703,
+        "Nights": 203.0,
+        "ADR": 125.02663438256658,
+        "LTRRent": 781.9620253164559
+      },
+      "status": "pass"
+    },
+    {
+      "case": "change_Tax",
+      "actual": {
+        "STR": 5716.5,
+        "LTR": 6248.571428571429,
+        "Gap": -532.0714285714294,
+        "Nights": 191.0,
+        "ADR": 119.96798719487795,
+        "LTRRent": 835.1666666666666
+      },
+      "status": "pass"
+    },
+    {
+      "case": "change_Cleaning",
+      "actual": {
+        "STR": 5644.5,
+        "LTR": 6677.828571428572,
+        "Gap": -1033.328571428572,
+        "Nights": 202.0,
+        "ADR": 124.04049493813275,
+        "LTRRent": 785.2848101265822
+      },
+      "status": "pass"
+    },
+    {
+      "case": "change_Stay",
+      "actual": {
+        "STR": 5644.5,
+        "LTR": 6677.828571428572,
+        "Gap": -1033.328571428572,
+        "Nights": 202.0,
+        "ADR": 124.04049493813275,
+        "LTRRent": 785.2848101265822
+      },
+      "status": "pass"
+    },
+    {
+      "case": "change_VariableCost",
+      "actual": {
+        "STR": 5644.5,
+        "LTR": 6677.828571428572,
+        "Gap": -1033.328571428572,
+        "Nights": 202.0,
+        "ADR": 124.04049493813275,
+        "LTRRent": 785.2848101265822
+      },
+      "status": "pass"
+    },
+    {
+      "case": "change_STRFixed",
+      "actual": {
+        "STR": 5544.5,
+        "LTR": 6677.828571428572,
+        "Gap": -1133.328571428572,
+        "Nights": 202.0,
+        "ADR": 124.91538557680289,
+        "LTRRent": 774.7362869198312
+      },
+      "status": "pass"
+    },
+    {
+      "case": "change_LTRFixed",
+      "actual": {
+        "STR": 6544.5,
+        "LTR": 5977.828571428572,
+        "Gap": 566.6714285714279,
+        "Nights": 170.0,
+        "ADR": 110.04224471941009,
+        "LTRRent": 954.0611814345991
+      },
+      "status": "pass"
+    },
+    {
+      "case": "change_PaidMonths",
+      "actual": {
+        "STR": 6544.5,
+        "LTR": 5971.342857142858,
+        "Gap": 573.1571428571424,
+        "Nights": 170.0,
+        "ADR": 109.98550181227347,
+        "LTRRent": 960.2416570771
+      },
+      "status": "pass"
+    },
+    {
+      "case": "change_Preparation",
+      "actual": {
+        "STR": 6544.5,
+        "LTR": 6677.828571428572,
+        "Gap": -133.3285714285721,
+        "Nights": 240.0,
+        "ADR": 142.41319835020622,
+        "LTRRent": 880.2215189873417
+      },
+      "status": "pass"
+    },
+    {
+      "case": "native_ADR50",
+      "actual": {
+        "STR": -885.0,
+        "LTR": 6677.828571428572,
+        "Gap": -7562.828571428572,
+        "Nights": 824.0,
+        "ADR": 116.16647919010126,
+        "LTRRent": 96.51898734177215
+      },
+      "status": "pass"
+    },
+    {
+      "case": "zero_paid_months",
+      "actual": {
+        "STR": 6544.5,
+        "LTR": -1800.0,
+        "Gap": 8344.5,
+        "Nights": 23.0,
+        "ADR": 41.99475065616798,
+        "LTRRent": null
+      },
+      "status": "pass"
+    },
+    {
+      "case": "zero_bookings",
+      "actual": {
+        "STR": -3000.0,
+        "LTR": 6677.828571428572,
+        "Gap": -9677.828571428572,
+        "Nights": 183.0,
+        "ADR": null,
+        "LTRRent": -126.58227848101265
+      },
+      "status": "pass"
+    },
+    {
+      "case": "negative_night_contribution",
+      "actual": {
+        "STR": -22485.0,
+        "LTR": 6677.828571428572,
+        "Gap": -29162.828571428574,
+        "Nights": null,
+        "ADR": 305.14285714285717,
+        "LTRRent": -2181.9620253164558
+      },
+      "status": "pass"
+    },
+    {
+      "case": "combined",
+      "actual": {
+        "STR": 6552.500000000002,
+        "LTR": 6250.0,
+        "Gap": 302.5000000000018,
+        "Nights": 264.0,
+        "ADR": 153.35497835497836,
+        "LTRRent": 1036.666666666667
+      },
+      "status": "pass"
+    }
+  ],
+  "engine": "Actual Power BI Desktop Analysis Services engine",
+  "note": "DAX filter contexts validate parameter calculations; native slicer/navigation interaction and visual QA are recorded separately."
+}

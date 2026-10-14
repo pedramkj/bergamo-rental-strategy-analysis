@@ -1,0 +1,74 @@
+table Assumptions
+
+	column booked_nights
+		dataType: double
+		summarizeBy: none
+		sourceColumn: booked_nights
+
+	column available_nights
+		dataType: double
+		summarizeBy: none
+		sourceColumn: available_nights
+
+	column gross_nightly_eur
+		dataType: double
+		summarizeBy: none
+		sourceColumn: gross_nightly_eur
+
+	column host_fee
+		dataType: double
+		summarizeBy: none
+		sourceColumn: host_fee
+
+	column tax
+		dataType: double
+		summarizeBy: none
+		sourceColumn: tax
+
+	column cleaning_per_turnover
+		dataType: double
+		summarizeBy: none
+		sourceColumn: cleaning_per_turnover
+
+	column stay_nights
+		dataType: double
+		summarizeBy: none
+		sourceColumn: stay_nights
+
+	column other_variable_per_night
+		dataType: double
+		summarizeBy: none
+		sourceColumn: other_variable_per_night
+
+	column common_fixed
+		dataType: double
+		summarizeBy: none
+		sourceColumn: common_fixed
+
+	column str_incremental_fixed
+		dataType: double
+		summarizeBy: none
+		sourceColumn: str_incremental_fixed
+
+	column long_monthly
+		dataType: double
+		summarizeBy: none
+		sourceColumn: long_monthly
+
+	column paid_months
+		dataType: double
+		summarizeBy: none
+		sourceColumn: paid_months
+
+	column recovery_years
+		dataType: double
+		summarizeBy: none
+		sourceColumn: recovery_years
+
+	partition Assumptions = m
+		mode: import
+		source =
+			let
+			 Source = Json.Document(File.Contents(RepositoryRoot & "\data\assumptions.json")),
+			 Rows = Table.FromRecords({Source})
+			in Rows

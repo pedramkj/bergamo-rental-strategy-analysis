@@ -1,0 +1,13 @@
+table PTax
+
+	column Value
+		dataType: double
+		summarizeBy: none
+		sourceColumn: [Value]
+		formatString: 0.0%
+
+		extendedProperty ParameterMetadata = {"version":0}
+
+	partition PTax = calculated
+		mode: import
+		source = SELECTCOLUMNS(GENERATESERIES(0, 0.4, 0.01), "Value", ROUND([Value], 3))
