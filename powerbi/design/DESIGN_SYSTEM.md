@@ -1,8 +1,9 @@
 # Bergamo financial research design system
 
 The approved final LinkedIn presentation is the primary visual reference. Its
-slide XML supplies the exact RGB values and the dominant Aptos font. The Word
-report and its original cover supply complementary gold and ivory accents.
+slide XML supplies the exact RGB values and the dominant Aptos font. Gold and
+ivory remain the validated dashboard tokens inherited from the historical
+schematic cover; they do not describe the current report cover.
 `build_dashboard.py` extracts occurrence counts and source fingerprints into
 `design-tokens.json`; it generates the theme from those tokens.
 
@@ -17,15 +18,18 @@ report and its original cover supply complementary gold and ivory accents.
 | Divider | `#DBE5EA` | Final slides; restrained grid / low-emphasis cells |
 | Pale teal | `#ADCDD2` | Final slides; secondary text / positive sensitivity |
 | Soft teal | `#9CCACD` | Final slides; secondary accents |
-| Gold | `#C6A46C` | Approved cover source; baseline marker |
-| Ivory | `#F7F5F0` | Approved cover source; documented reference |
+| Gold | `#C6A46C` | Historical schematic palette; retained baseline marker |
+| Ivory | `#F7F5F0` | Historical schematic palette; retained reference |
 
 ## Conflicts resolved explicitly
 
-The cover uses `#101C30` navy and Calibri. The latest carousel uses `#0D233A`
-and Aptos; these take precedence for the interactive report. Default Office
-theme colors remain in unused presentation theme parts. They are not dashboard
-brand tokens. No unrelated palette or newly generated branding is introduced.
+The current report, **More Tourists, Why Not More Profit?**, has its own
+approved native navy-and-gold Word cover. Its canonical preview is
+[figures/report-cover.png](../../figures/report-cover.png), extracted from the
+[approved final PDF](../../reports/Bergamo_Rental_Strategy_FINAL_2026.pdf).
+The dashboard retains the carousel's `#0D233A` navy and Aptos hierarchy. Default
+Office theme colors in unused presentation parts are not dashboard brand tokens.
+Publication cleanup does not restyle either asset.
 
 ## Typography and composition
 

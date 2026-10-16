@@ -29,7 +29,7 @@ The report builder writes `generated/report/Bergamo_Rental_Strategies_Generated_
 
 The approved release is `reports/Bergamo_Rental_Strategy_FINAL_2026.docx` and its corresponding PDF. These were copied byte for byte from the approved final delivery and were not regenerated. Source literals include earlier approved editorial work but do not establish byte-for-byte reproduction of the manually reviewed final file. Do not replace the approved report with a generated draft.
 
-`src/report_cover.py` uses the editable native Word cover master and supplied artwork in [assets/report-cover](../assets/report-cover/README.md). The GitHub cover is a raster extraction of the actual approved PDF page 1, not the older schematic artwork. Historical schematic files remain because source history and earlier workflows may refer to them.
+`src/report_cover.py` uses the editable native Word cover master and supplied artwork in [assets/report-cover](../assets/report-cover/README.md). The GitHub cover is a raster extraction of the actual approved PDF page 1, not the older schematic artwork. The historical schematic artwork is preserved as an explicitly recorded input to the earlier reconstruction validation (`results/reconstruction-validation.json`); it is not an alternative current report cover.
 
 ## Frozen inputs and provenance
 
