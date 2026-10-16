@@ -4,10 +4,17 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 class PublicationConsistencyTests(unittest.TestCase):
     def test_word_contains_current_statistics_and_historical_case(self):
-        with zipfile.ZipFile(ROOT/'reports/Bergamo_Rental_Strategies_Complete_EN_v03.docx') as z:
+        with zipfile.ZipFile(ROOT/'reports/Bergamo_Rental_Strategy_FINAL_2026.docx') as z:
             xml=E.fromstring(z.read('word/document.xml'));text=' '.join(xml.itertext())
         for token in ['894.29','6,677.83','133.33','6,732','96 candidate','14 primary']:self.assertIn(token,text)
         self.assertIn('Complete rental candidate reconciliation',text)
+    def test_approved_release_files_match_manifest(self):
+        import hashlib
+        release=json.loads((ROOT/'data/publication-manifest.json').read_text())['published_release']
+        self.assertEqual(release['title'],'More Tourists, Why Not More Profit?')
+        for name,expected in release['files'].items():
+            self.assertEqual(hashlib.sha256((ROOT/name).read_bytes()).hexdigest(),expected,name)
+
     def test_carousel_text_matches_new_case(self):
         with zipfile.ZipFile(ROOT/'publication/Bergamo_LinkedIn_Carousel_EN_Final.pptx') as z:
             text=' '.join(' '.join(E.fromstring(z.read(n)).itertext()) for n in z.namelist() if n.startswith('ppt/slides/slide') and n.endswith('.xml'))

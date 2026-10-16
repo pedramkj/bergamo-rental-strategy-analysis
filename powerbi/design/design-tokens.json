@@ -1,10 +1,10 @@
 {
   "source_priority": [
     "publication/Bergamo_LinkedIn_Carousel_EN_Final.pptx",
-    "reports/Bergamo_Rental_Strategies_Complete_EN_v03.docx",
+    "reports/Bergamo_Rental_Strategy_FINAL_2026.docx",
     "src/report_cover.py"
   ],
-  "source_sha256": "81bf9420d584df808dcc0336c3e0e658d9cc447311734a0bce79684769e3876b",
+  "source_sha256": "20698845835e5864dc9edf304848c4e84fc431a7afc44a72231836f0a5bb6073",
   "palette": {
     "navy": "#0D233A",
     "canvas": "#F6F8FA",
@@ -68,7 +68,7 @@
     "28.5": 1
   },
   "formatting": {
-    "currency": "€#,0.00;(€#,0.00);€0.00",
+    "currency": "\u00e2\u201a\u00ac#,0.00;(\u00e2\u201a\u00ac#,0.00);\u00e2\u201a\u00ac0.00",
     "count": "#,0",
     "percent": "0.0%;(0.0%);0.0%"
   }

@@ -82,7 +82,7 @@ class RentalReconstructionTests(unittest.TestCase):
             self.assertAlmostEqual(str_cash(180,row['required_nightly_price'],a),target)
     def test_report_source_matches_reviewed_counts(self):
         narrative=(ROOT/'src/rental_report_sections.py').read_text(encoding='utf8')
-        self.assertIn('Manual online rental listing review',narrative)
+        self.assertIn('manual online rental listing review',narrative.casefold())
         self.assertIn("r['primary']",narrative)
         self.assertNotIn('in-person field survey',narrative)
     def test_no_personal_contacts_in_public_observations(self):

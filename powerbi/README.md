@@ -1,4 +1,6 @@
-# Bergamo rental strategies — native Power BI project
+# More Tourists, Why Not More Profit? — Power BI
+
+[Approved research report](../reports/Bergamo_Rental_Strategy_FINAL_2026.pdf) · [Project overview](../README.md)
 
 Five editorial report pages extend the approved report and LinkedIn identity:
 Overview, Rental Market, Simulator, Tourism Context and Sensitivity.
@@ -133,3 +135,9 @@ python powerbi/validate_project.py
 
 A refreshed snapshot or changed model requires a new actual-engine validation
 and a new Desktop Save As; rebuilding PBIP source does not regenerate the PBIX.
+
+## Final publication update — 16 October 2026
+
+The Overview title was edited and saved in Power BI Desktop to match the final report. The PBIP title and generator literal match. A native five-page PDF export supplied the updated Overview preview. All other previews remain the earlier validated captures. Package comparison confirms the imported DataModel is byte-identical; only the Overview textbox definition and Desktop security binding changed. No refresh, DAX, relationship, Power Query, parameter or interaction change was made. Existing Desktop numerical evidence remains historical; this release adds package-integrity and unit checks, not a new claim that all interaction scenarios were repeated.
+
+The new Overview export renders with a serif fallback despite Aptos remaining specified and registered locally. The rendering cause was not established in this publication task. No font definitions were changed to compensate; the earlier previews retain their validated typography. See [release validation](../docs/final-release-validation.md).

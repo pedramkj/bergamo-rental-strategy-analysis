@@ -1,0 +1,56 @@
+test_allocation_totals_and_ties (test_analysis.AllocationAndValidationTests.test_allocation_totals_and_ties) ... ok
+test_monthly_source_mismatch_rejected (test_analysis.AllocationAndValidationTests.test_monthly_source_mismatch_rejected) ... ok
+test_validation_survives_optimisation (test_analysis.AllocationAndValidationTests.test_validation_survives_optimisation) ... ok
+test_base_cash (test_analysis.FinancialModelTests.test_base_cash) ... ok
+test_cash_bridge_reconciles (test_analysis.FinancialModelTests.test_cash_bridge_reconciles) ... ok
+test_ceiling_thresholds (test_analysis.FinancialModelTests.test_ceiling_thresholds) ... ok
+test_common_cost_cancels_gap (test_analysis.FinancialModelTests.test_common_cost_cancels_gap) ... ok
+test_differential_cost_changes_gap (test_analysis.FinancialModelTests.test_differential_cost_changes_gap) ... ok
+test_invalid_inputs (test_analysis.FinancialModelTests.test_invalid_inputs) ... ok
+test_long_term_grid (test_analysis.FinancialModelTests.test_long_term_grid) ... ok
+test_price_and_booking_grid (test_analysis.FinancialModelTests.test_price_and_booking_grid) ... ok
+test_price_threshold (test_analysis.FinancialModelTests.test_price_threshold) ... ok
+test_shorter_stays_increase_cleaning (test_analysis.FinancialModelTests.test_shorter_stays_increase_cleaning) ... ok
+test_unreachable_threshold (test_analysis.FinancialModelTests.test_unreachable_threshold) ... ok
+test_vacancy_alternative (test_analysis.FinancialModelTests.test_vacancy_alternative) ... ok
+test_italian_separator (test_listing_review.ListingReviewTests.test_italian_separator) ... ok
+test_mean_is_not_subgroup_median (test_listing_review.ListingReviewTests.test_mean_is_not_subgroup_median) ... ok
+test_missing_and_invalid_prices (test_listing_review.ListingReviewTests.test_missing_and_invalid_prices) ... ok
+test_no_unverified_claim (test_listing_review.ListingReviewTests.test_no_unverified_claim) ... ok
+test_registry_statistics (test_listing_review.ListingReviewTests.test_registry_statistics) ... ok
+test_actual_dax_results_match_all_python_cases (test_powerbi.PowerBITests.test_actual_dax_results_match_all_python_cases) ... ok
+test_model_bindings_exist_and_measure_count (test_powerbi.PowerBITests.test_model_bindings_exist_and_measure_count) ... ok
+test_navigation_targets_and_primary_scope (test_powerbi.PowerBITests.test_navigation_targets_and_primary_scope) ... ok
+test_saved_pbix_has_native_model_and_five_pages (test_powerbi.PowerBITests.test_saved_pbix_has_native_model_and_five_pages) ... ok
+test_visual_native_reference_names_are_unique (test_powerbi.PowerBITests.test_visual_native_reference_names_are_unique) ... ok
+test_approved_release_files_match_manifest (test_publication_consistency.PublicationConsistencyTests.test_approved_release_files_match_manifest) ... ok
+test_carousel_text_matches_new_case (test_publication_consistency.PublicationConsistencyTests.test_carousel_text_matches_new_case) ... ok
+test_native_break_even_chart_and_workbook_agree (test_publication_consistency.PublicationConsistencyTests.test_native_break_even_chart_and_workbook_agree) ... ok
+test_readme_internal_targets_exist (test_publication_consistency.PublicationConsistencyTests.test_readme_internal_targets_exist) ... ok
+test_word_contains_current_statistics_and_historical_case (test_publication_consistency.PublicationConsistencyTests.test_word_contains_current_statistics_and_historical_case) ... ok
+test_all_supplied_candidates_retained (test_rental_market.RentalReconstructionTests.test_all_supplied_candidates_retained) ... ok
+test_base_and_charge_are_not_double_deducted (test_rental_market.RentalReconstructionTests.test_base_and_charge_are_not_double_deducted) ... ok
+test_bundle_without_evidenced_split_rejected (test_rental_market.RentalReconstructionTests.test_bundle_without_evidenced_split_rejected) ... ok
+test_cohort_counts_and_reconciliation (test_rental_market.RentalReconstructionTests.test_cohort_counts_and_reconciliation) ... ok
+test_confirmed_matches_exclude_price_conflicts (test_rental_market.RentalReconstructionTests.test_confirmed_matches_exclude_price_conflicts) ... ok
+test_evidence_model_uses_unrounded_mean (test_rental_market.RentalReconstructionTests.test_evidence_model_uses_unrounded_mean) ... ok
+test_geography_requires_positive_selected_scope (test_rental_market.RentalReconstructionTests.test_geography_requires_positive_selected_scope) ... ok
+test_historical_financials_unchanged (test_rental_market.RentalReconstructionTests.test_historical_financials_unchanged) ... ok
+test_missing_does_not_become_zero (test_rental_market.RentalReconstructionTests.test_missing_does_not_become_zero) ... ok
+test_new_break_even_is_minimal (test_rental_market.RentalReconstructionTests.test_new_break_even_is_minimal) ... ok
+test_no_automatic_street_or_price_merge (test_rental_market.RentalReconstructionTests.test_no_automatic_street_or_price_merge) ... ok
+test_no_personal_contacts_in_public_observations (test_rental_market.RentalReconstructionTests.test_no_personal_contacts_in_public_observations) ... ok
+test_original_prices_are_unchanged (test_rental_market.RentalReconstructionTests.test_original_prices_are_unchanged) ... ok
+test_primary_price_statistics (test_rental_market.RentalReconstructionTests.test_primary_price_statistics) ... ok
+test_raw_arithmetic_independently (test_rental_market.RentalReconstructionTests.test_raw_arithmetic_independently) ... ok
+test_recovered_prices_have_new_provenance (test_rental_market.RentalReconstructionTests.test_recovered_prices_have_new_provenance) ... ok
+test_report_source_matches_reviewed_counts (test_rental_market.RentalReconstructionTests.test_report_source_matches_reviewed_counts) ... ok
+test_source_urls_preserved (test_rental_market.RentalReconstructionTests.test_source_urls_preserved) ... ok
+test_temporary_contract_never_primary (test_rental_market.RentalReconstructionTests.test_temporary_contract_never_primary) ... ok
+test_unit_price_uses_each_property_area (test_rental_market.RentalReconstructionTests.test_unit_price_uses_each_property_area) ... ok
+test_unresolved_prices_never_enter_sample (test_rental_market.RentalReconstructionTests.test_unresolved_prices_never_enter_sample) ... ok
+
+----------------------------------------------------------------------
+Ran 51 tests in 0.542s
+
+OK

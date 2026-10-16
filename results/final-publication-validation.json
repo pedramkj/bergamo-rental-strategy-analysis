@@ -1,0 +1,44 @@
+{
+  "release_date": "2026-10-16",
+  "report_files": {
+    "reports/Bergamo_Rental_Strategy_FINAL_2026.docx": "47ffb7dbf85fe8af8caaab01de0aa6f5bfcc821e4599f7a16a2ab94a4ce47f6b",
+    "reports/Bergamo_Rental_Strategy_FINAL_2026.pdf": "0b8d9fd5e4ed7a10fc7b3449969c9db936e6a6e2223b29cbce9cda3877d5d9ec"
+  },
+  "report_pages": 33,
+  "analytical_figures": 14,
+  "word_tables": 23,
+  "carousel_slides": 9,
+  "carousel_changed_members": [
+    "ppt/slides/slide1.xml"
+  ],
+  "carousel_slides_2_to_9_numeric_tokens_unchanged": true,
+  "powerbi": {
+    "changed_entries": [
+      "Report/definition/pages/Executive/visuals/Executive_004/visual.json",
+      "SecurityBindings"
+    ],
+    "data_model_byte_identical": true
+  },
+  "protected_preexisting_research_files_checked": 75,
+  "protected_preexisting_research_changes": [],
+  "local_markdown_image_targets_checked": 55,
+  "broken_local_targets": [],
+  "deleted_obsolete_publications": [
+    "reports/Bergamo_Rental_Strategies_Complete_EN_v03.docx",
+    "reports/Bergamo_Rental_Strategies_Complete_EN_v03.pdf",
+    "reports/Bergamo_Report_Contents_EN.docx",
+    "reports/Bergamo_Report_Contents_EN.pdf",
+    "reports/Bergamo_Report_Contents_EN.txt"
+  ],
+  "tests": {
+    "status": "PASS",
+    "command": "python -m unittest discover -s tests -v",
+    "count": 51,
+    "environment": "Disposable copy of release files; analytical writers never run in publication checkout."
+  },
+  "limitations": [
+    "Existing source metadata backlog remains disclosed.",
+    "Local Power BI Overview export uses a serif fallback despite Aptos being specified and registered; cause not established. Model and font definitions unchanged."
+  ],
+  "historical_audit_records": "Retained unchanged, including original report filenames."
+}

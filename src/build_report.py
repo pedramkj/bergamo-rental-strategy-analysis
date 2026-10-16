@@ -2,7 +2,7 @@ import json, math
 from pathlib import Path
 import argparse
 from listing_review import review as review_listings
-from report_cover import add_cover
+from report_cover import add_cover, TITLE
 from rental_market_analysis import run as rebuild_rental
 from rental_figures import build as build_rental_figures
 from rental_report_sections import chapter as rental_chapter, appendix as rental_appendix
@@ -80,7 +80,7 @@ d=Document();s=d.sections[0];s.page_width=Inches(8.5);s.page_height=Inches(11);s
 for name in ['Normal','Title','Subtitle','Heading 1','Heading 2']:
     st=d.styles[name];st.font.name='Calibri';st.font.size=Pt(11 if name=='Normal' else 22 if name=='Title' else 15 if name=='Heading 1' else 12);st.font.color.rgb=RGBColor(0,0,0);st.paragraph_format.space_after=Pt(6);st.paragraph_format.line_spacing=1.08
     for el in list(st.element.iter(qn('w:pBdr'))):el.getparent().remove(el)
-f=s.footer.paragraphs[0];f.alignment=WD_ALIGN_PARAGRAPH.CENTER;f.add_run('Pedram Kojouri | Research edition | ');fld=OxmlElement('w:fldSimple');fld.set(qn('w:instr'),'PAGE');f._p.append(fld)
+f=s.footer.paragraphs[0];f.alignment=WD_ALIGN_PARAGRAPH.CENTER;fld=OxmlElement('w:fldSimple');fld.set(qn('w:instr'),'PAGE');f._p.append(fld)
 
 header=s.header.paragraphs[0];header.alignment=WD_ALIGN_PARAGRAPH.RIGHT
 from docx.opc.constants import RELATIONSHIP_TYPE as RT
@@ -119,15 +119,47 @@ def table(headers,rows):
                 for run in paragraph.runs:run.font.size=Pt(9)
     p('')
 def fig(name,caption,explanation):
-    d.add_picture(str(charts/name),width=Inches(6.6));p(caption,'Caption');p(explanation)
+    d.add_picture(str(charts/name),width=Inches(6.6));p(caption,'Caption');note=p(explanation)
+    if caption.startswith('Figure 12 '):note.paragraph_format.keep_together=True
 add_cover(d)
-p('Executive summary','Title');p('More Tourists, More Profit?');p('A Data-Driven Business Case Study on Rental Profitability in Bergamo');p('Pedram Kojouri | Research correction | 14 October 2026')
-sub('Main business finding')
-p('Bergamo has a growing accommodation market, but tourism growth does not establish a general net-income advantage for short-term renting. In the evidence-informed owner-operated illustration, short-term rental net cash income is EUR 6,544.50 per year, compared with EUR 6,677.83 for the long-term alternative using the new selected-sample mean. The EUR 133.33 gap is too small, relative to uncertainty in the inputs, to support a decisive ranking.')
-p('The market analysis concerns the City of Bergamo. Financial calculations explain conditions under which strategies may differ; they do not estimate average city-wide profit. Acquisition, financing, professional management and incremental preparation are outside the base calculation. No monetary deduction is made for the owner’s time.')
-p('A Manual online rental listing review reconstructed 96 candidate rows from the original 21 records, 20 preliminary leads and 55 additional advertisements. Reviewed identity decisions and strict comparable-property criteria produced 14 primary properties: mean EUR 894.29 per month and median EUR 850. This selected sample is not representative of all Bergamo and the target of 20 primary properties was not reached.')
-p('A separate evidence-informed illustration applies the unrounded primary mean while holding other assumptions fixed. Long-term net becomes EUR 6,677.83 versus unchanged short-term EUR 6,544.50, a EUR 133.33 short-term shortfall. The historical EUR 900 scenario and its EUR 6,732 long-term net result remain intact. Both comparisons are too close, relative to unmeasured input uncertainty, to establish a decisive market-wide ranking.')
+# Approved final executive summary; labels intentionally excluded from the TOC.
+from docx.enum.style import WD_STYLE_TYPE
+summary_label=d.styles.add_style('Executive Summary Label',WD_STYLE_TYPE.PARAGRAPH)
+summary_label.base_style=d.styles['Normal'];summary_label.font.bold=True
+summary_label.font.color.rgb=RGBColor(28,76,116);summary_label.paragraph_format.keep_with_next=True
+summary_outline=OxmlElement('w:outlineLvl');summary_outline.set(qn('w:val'),'9');summary_label.element.get_or_add_pPr().append(summary_outline)
+def summary_p(text,style=None,bold_spans=()):
+    paragraph=p('',style);cursor=0
+    for span in sorted(bold_spans,key=text.index):
+        offset=text.index(span,cursor)
+        if offset>cursor:paragraph.add_run(text[cursor:offset])
+        paragraph.add_run(span).bold=True;cursor=offset+len(span)
+    if cursor<len(text):paragraph.add_run(text[cursor:])
+    return paragraph
+summary_p('Executive Summary','Title',())
+summary_p('More Tourists, Why Not More Profit?',None,())
+summary_p('A Data-Driven Business Case Study on Rental Profitability in Bergamo',None,())
+summary_p('Pedram Kojouri | October 2026',None,())
+summary_p('Main business finding','Heading 2',())
+summary_p('More tourists do not automatically mean more profit for property owners. This study asks whether a vacant apartment in Bergamo would retain more annual cash as a short-term tourist rental (STR) or a long-term residential lease (LTR).',None,('More tourists do not automatically mean more profit for property owners.',))
+summary_p('Financial comparison','Executive Summary Label',())
+summary_p('Under the owner-operated, sample-mean illustration:',None,())
+summary_p('STR: €6,544.50 annual net cash','List Bullet',('STR: €6,544.50 annual net cash',))
+summary_p('LTR: €6,677.83 annual net cash','List Bullet',('LTR: €6,677.83 annual net cash',))
+summary_p('Difference: €133.33 per year in favour of LTR','List Bullet',('Difference: €133.33 per year in favour of LTR',))
+summary_p('Annual net cash is what remains after the cash costs and tax included in the model. It is not comprehensive economic profit or a complete investment return. The gap is too small relative to input uncertainty to establish a decisive advantage. These are conditional scenario results, not observed city-wide average profits.',None,('The gap is too small relative to input uncertainty to establish a decisive advantage.',))
+summary_p('What does this mean for property owners?','Executive Summary Label',())
+summary_p('Converting a vacant apartment into tourist accommodation is not necessarily a better financial decision than finding a long-term tenant. Platform fees, owner-paid cleaning, utilities and other operating costs reduce the cash retained from gross short-term revenue. Guest turnover, uncertain bookings and management requirements also matter; not all are fully priced in this comparison.',None,())
+summary_p('Evidence and limitations','Executive Summary Label',())
+summary_p('A manual online rental listing review reconstructed 96 candidate rows: 21 original records, 20 preliminary leads and 55 additional advertisements. These overlapping inputs are not 96 independent apartments. Reviewed identity decisions and strict comparable-property criteria produced 14 primary properties, with mean monthly asking rent €894.29 and median €850. The target of 20 was not reached; the selected sample is not representative of all Bergamo, and asking rents are not signed contracts.',None,())
+summary_p('The illustration uses the unrounded primary mean, holding other assumptions fixed. STR assumes 180 booked nights out of 330 available and €115 gross nightly revenue, which is not a verified comparable realised rate. LTR assumes 12 paid months. Eligible tax treatment must be checked. Operating costs include estimated allowances, rather than verified property-specific expenditure. Owner time is unpriced; acquisition, financing and professional management are excluded. Incremental preparation is tested separately through five-year simple recovery. The historical €900 monthly-rent scenario remains separate, with €6,732 annual LTR net cash; it likewise does not establish a decisive market-wide ranking.',None,())
+summary_p('Decision implication','Executive Summary Label',())
+summary_p('The base case does not demonstrate that conversion is financially superior to long-term leasing. Before deciding, an owner needs achievable prices and bookings, a credible long-term alternative, verified operating and compliance costs, and an assessment of preparation investment and management time. Stronger property-specific performance could change the comparison; tourism growth alone is insufficient.',None,('The base case does not demonstrate that conversion is financially superior to long-term leasing.',))
 page();p('Contents','Title')
+# Preserve the approved TOC typography when Word refreshes its generated entries.
+for toc_style_name in ['TOC 1','TOC 2']:
+    toc_style=d.styles[toc_style_name] if toc_style_name in d.styles else d.styles.add_style(toc_style_name,WD_STYLE_TYPE.PARAGRAPH)
+    toc_style.font.size=Pt(10);toc_style.paragraph_format.space_after=Pt(0);toc_style.paragraph_format.line_spacing=1
 tocp=p('');toc=OxmlElement('w:fldSimple');toc.set(qn('w:instr'),'TOC \\o "1-2" \\h \\z \\u');tocp._p.append(toc)
 page();h('1 Introduction and analytical scope')
 p('The project began with an apparent opportunity: more visitors might mean more rental income. Historic Città Alta and access to BGY provided a reason to investigate, but were not treated as proof of profitability. The research question became: under what conditions would short-term renting retain more annual cash than a residential lease?')
@@ -148,11 +180,11 @@ p('The Province recorded 3,359,760 guest nights in 2025, approximately 38% above
 p('FULL reports 1,884 city Airbnb listings active for at least one day in 2024, up 74.3% from 2017. Booked nights rose 182.8% over that period. Availability, listing mix, prices and costs prevent a direct conclusion that every host’s return improved. [5, pp. 12–18]')
 page();sub('2.1 The role of Bergamo Airport in tourism demand')
 p('BGY adds a large regional access channel to the business story. We joined Assaeroporti annual passenger totals to city arrivals and guest nights by calendar year for 2019–2025. For each year, the January–December passenger total was selected, rather than the December-only row. The annual summary and passenger-detail tables agree. City values through 2024 use the reconciled regional extract; 2025 uses the separately identified provincial publication. [1–4, 37–43]')
-table(['Year','BGY passengers','City arrivals','City guest nights'],[[str(r['year']),f"{r['airport_passengers']:,}",f"{r['city_arrivals']:,}",f"{r['city_guest_nights']:,}"] for r in airport])
+table(['Year','BGY passenger movements','City arrivals','City guest nights'],[[str(r['year']),f"{r['airport_passengers']:,}",f"{r['city_arrivals']:,}",f"{r['city_guest_nights']:,}"] for r in airport])
 fig('airport.png','Figure 2  BGY annual passenger movements','Source: Assaeroporti, January–December cumulative passenger totals, 2019–2025. [37–43] This airport activity metric counts passenger movements rather than unique tourists staying in Bergamo. The 2020–2021 decline and later recovery affect comparisons across the full window.')
 page();sub('2.2 Airport and city growth compared')
 fig('airport-city.png','Figure 3  Indexed annual airport and city trends','Each series is divided by its 2019 value and multiplied by 100. Indexing compares relative growth across different units without treating passengers, arrivals and guest nights as equivalent counts. Sources: [1–4, 37–43]. The 2025 city value comes from a separate release.')
-table(['Year-on-year change','BGY passengers','City arrivals','City guest nights'],[[str(airport[i]['year'])]+[f"{(airport[i][k]/airport[i-1][k]-1)*100:+.1f}%" for k in ['airport_passengers','city_arrivals','city_guest_nights']] for i in range(1,len(airport))])
+table(['Year','BGY passenger movements (%)','City arrivals (%)','City guest nights (%)'],[[str(airport[i]['year'])]+[f"{(airport[i][k]/airport[i-1][k]-1)*100:+.1f}%" for k in ['airport_passengers','city_arrivals','city_guest_nights']] for i in range(1,len(airport))])
 p('Relative to 2019, BGY passengers were 25.2% higher in 2024 and 22.2% higher in 2025. City guest nights grew by 52.7% and 71.8% respectively. In 2025, airport passengers fell 2.4%, while city arrivals grew 10.7% and guest nights grew 12.6%. The city therefore continued expanding even when airport activity declined. The series share a recovery period but do not move in lockstep.')
 p('This is a descriptive comparison of seven annual observations. Pandemic disruption, accommodation supply, event calendars and wider travel trends can move both series. We do not estimate a causal effect or a passenger-to-stay conversion rate. Airport passengers include departing and arriving trips and travellers whose destination may lie outside the city. Accommodation also serves visitors using other transport. Dividing city arrivals by airport passengers would not identify the share staying locally.')
 p('Business implication: airport access deserves attention when considering guest segments, arrival times and average stay length, but the airport trend does not justify increasing the 180-night assumption or adding a location premium. One-night airport stays could increase cleaning turnovers; this remains a hypothesis. Neighbourhood effects, airline-specific traffic and net profit attributable to BGY require matched property and guest-origin evidence.')
@@ -160,7 +192,7 @@ p('Business implication: airport access deserves attention when considering gues
 page();h('3 Short-term performance and seasonality')
 p('FULL reports overall Airbnb occupancy falling from 57.8% in 2023 to 54.0% in 2024, a reduction of 3.8 percentage points. Entire apartments in 2024 show 54.9% occupancy and approximately EUR 115 ADR. Across all listing types, average annual bookings were 134 nights and average revenue EUR 14,182. The all-listing figure is not an entire-apartment benchmark. [5, pp. 16–20]')
 p('The financial model uses EUR 115 as illustrative gross nightly revenue before the assumed host fee and income tax. It is not a validated direct import of provider ADR. AirDNA includes cleaning charges and may adjust service fees; revenue definitions must be reconciled to avoid subtracting a fee twice. Multiplying separately averaged price and occupancy also need not reproduce average listing revenue. [7–8]')
-fig('season.png','Figure 4  Observed monthly city guest nights in 2024','July leads arrivals; October leads guest nights. The bars include hotels and non-hotels. They identify the city’s seasonal demand, not Airbnb occupancy or fully booked apartments. Source [1].')
+fig('season.png','Figure 4  Observed monthly city guest nights in 2024','October leads the guest-night series shown here; July leads arrivals, which are not plotted. The bars include hotels and non-hotels. They identify the city’s seasonal demand, not Airbnb occupancy or fully booked apartments. Source [1].')
 p('April–October accounts for 65.5% of city guest nights in 2019, 67.3% in 2022, 67.4% in 2023 and 67.3% in 2024. October leads guest nights in each of those years. High demand does not mean full occupancy: FULL reports a 2024 overall monthly maximum of 69% in May and a minimum of 34% in January. [1, 5]')
 page();sub('Monthly allocation and its limits')
 p('For each reference year, monthly daily guest nights are divided by that year’s annual daily mean. The indices are averaged equally across 2019, 2022, 2023 and 2024, multiplied by non-leap-year month lengths and normalised into shares. Largest-remainder rounding preserves the annual scenario total. The calendar calculation is not observed 2025 data.')
@@ -172,15 +204,15 @@ table(['Area','Reported annual revenue per listing in 2024'],[['Centro–Papa Gi
 p('These averages are unadjusted descriptive comparisons, not a profitability ranking. Size, capacity, quality, available days and acquisition costs may differ. No causal location premium is estimated. A table is used instead of a league-chart presentation to avoid implying a superior investment area. [5, pp. 28–32]')
 page();rental_chapter(p,h,sub,page,table,fig)
 page();h('5 Revenue, Costs and Net Cash Income')
-p('This chapter retains the historical operating scenario. Chapter4 provides the separate comparison using the new rental mean; neither scenario represents observed property profit.')
+p('This chapter retains the historical operating scenario. Chapter 4 provides the separate comparison using the new rental mean; neither scenario represents observed property profit.')
 p('The base rental is owner-operated and already suitable for guests. Cleaning is entirely owner-paid, with no cleaning charge collected separately. No hypothetical cost for the owner’s time is deducted. Professional management would be an additional real payment.')
 table(['Input','Base value and status'],[['Bookings and availability','180 / 330 nights; scenario assumptions'],['Gross nightly revenue','EUR 115; reference-informed assumption'],['Host fee and eligible income tax','15.5% and 21%; scenario rates'],['Cleaning and stay length','EUR 30 per turnover; 3 nights; unverified'],['Other variable costs','EUR 10 per booked night; allowance'],['Annual fixed costs','EUR 3,000: common EUR 1,800 + STR-specific EUR 1,200']])
 p('EUR 115 is a reference-informed modelling assumption for gross accommodation revenue before host fees and income tax. It has not been verified as an observed, directly comparable gross ADR. The scenario collects no separate cleaning charge; provider ADR definitions must be reconciled before replacing this input.')
 p('At three nights per stay, 180 nights imply sixty turnovers and EUR 1,800 cleaning expense. At two nights, the same cleaning price costs EUR 2,700; at five nights, EUR 1,080. Laundry, linen and materials must be assigned once, not duplicated across allowances.')
 p('The 15.5% fee is a host-paid structure assumption, not universal. Airbnb documents different structures and says displayed service fees include VAT where applicable; VAT is not added again here. Account and channel mix require verification. [13]')
 p('The 21% tax is conditional on eligibility. Equal model rates do not prove equal legal treatment. Tax is applied to model gross revenue before platform fees. Separately collected and remitted tourist tax is not retained revenue. IMU, TARI and property-specific compliance expenses are not individually priced and must be checked against the allowances. [14–16]')
-fig('bridge.png','Figure 12  Historical short-term rental cash bridge','EUR 20,700 gross is reduced by EUR 4,347 tax, EUR 3,208.50 host fees, EUR 1,800 cleaning, EUR 1,800 variable costs and EUR 3,000 fixed costs. EUR 6,544.50 remains, about 31.6% of gross. This is a scenario margin, not an observed city margin. Source: project assumptions and calculations; EUR 115 is not a verified comparable gross ADR.')
-page();sub('Fixed-cost budget and uncertainty')
+fig('bridge.png','Figure 12  Historical short-term rental cash bridge','EUR 20,700 gross is reduced by EUR 4,347 tax, EUR 3,208.50 host fees, EUR 1,800 cleaning, EUR 1,800 variable costs and EUR 3,000 fixed costs. EUR 6,544.50 remains, about 31.6% of gross. These deductions include estimated cleaning, variable-cost and fixed-cost allowances. The resulting scenario margin is not an observed city margin or a complete accounting of property-level economic costs. Source: project assumptions and calculations; EUR 115 is not a verified comparable gross ADR.')
+sub('Fixed-cost budget and uncertainty')
 p('Net cash = booked nights × gross nightly revenue × 0.635 − booked nights × EUR 20 − EUR 3,000. The EUR 20 combines cleaning and other variable costs. Acquisition, debt service, incremental preparation and professional management are excluded; exceptional maintenance may exceed allowances.')
 p('The following is an illustrative allocation of the existing EUR 3,000 allowance, not local supplier quotes or measured owner spending. Ranges are analyst-selected stress values, not confidence intervals. Property tax eligibility, tenant-paid charges and actual bills must replace them for a property decision. Keeping the base total unchanged isolates the effect of transparency rather than silently changing the result.')
 table(['Annual item','Base EUR','Stress range EUR'],[['Common insurance','250','150–400'],['Common routine maintenance','400','200–700'],['Common property-tax reserve','800','0–1,300'],['Common owner building charges','350','150–600'],['Common subtotal','1,800','900 / 1,800 / 2,700 tested as totals'],['STR standing utility / internet charges','400','200–650'],['STR administration / compliance reserve','300','100–500'],['STR guest-wear replacement reserve','400','200–700'],['STR marketing / miscellaneous','100','0–150'],['STR incremental subtotal','1,200','600 / 1,200 / 1,800 tested as totals']])
@@ -203,7 +235,7 @@ p('Cells show short-term minus long-term annual net cash, in EUR. Positive cells
 page();sub('Additional preparation changes the threshold')
 p('Only expenditure above the long-term alternative is relevant to conversion. A five-year simple recovery target adds preparation cost divided by five to the required annual surplus. It leaves operating cash unchanged and is not a market-required horizon or a discounted investment appraisal.')
 fig('setup.png','Figure 14  Historical booking threshold with five-year simple recovery','At EUR 115 nightly revenue, the model requires 184, 203, 222 and 241 nights for EUR 0, EUR 5,000, EUR 10,000 and EUR 15,000 additional preparation. The latter thresholds match long-term cash and recover the cost difference over five years. They do not predict achievable occupancy. Source: project calculations with explicit scenario inputs.')
-table(['Additional preparation',f'Nights at EUR {a["gross_nightly_eur"]}',f'Price at {a["booked_nights"]} nights'],[[f'EUR {cost:,}',str(booking_threshold(cost,a)['minimum_whole_nights']),f'EUR {required_nightly_price(cost,a):.2f}'] for cost in setup])
+table(['Additional preparation (EUR)',f'Booked nights/year at EUR {a["gross_nightly_eur"]}/night',f'Gross price at {a["booked_nights"]} nights (EUR/night)'],[[f'EUR {cost:,}',str(booking_threshold(cost,a)['minimum_whole_nights']),f'EUR {required_nightly_price(cost,a):.2f}'] for cost in setup])
 p('Required booked nights are always rounded UP to the next whole night using the ceiling function; conventional rounding would understate the minimum. Unrounded thresholds are 183.54, 202.40, 221.25 and 240.11 nights using the stated formula. These are scenario requirements, not occupancy forecasts.')
 p('The two performance columns are alternatives, not simultaneous improvements. Financing, inflation, discounting and residual equipment value are excluded. Already suitable properties face a close operating comparison; costly conversion requires a substantiated surplus. More visitors alone cannot justify that investment.')
 page();h('7 Research methodology and challenges')
@@ -220,9 +252,9 @@ sub('Supported findings')
 p('The city has substantial accommodation demand and a recurring broad high-demand season. Seasonal allocation should replace a uniform description of demand. Taxes and operating expenses reduce the attraction implied by gross short-term receipts. The financial choice depends on the rental alternative, cost structure and conversion expenditure.')
 sub('Unresolved evidence')
 p('The airport comparison establishes relative trends and a 2025 divergence, but does not identify local stays or a causal profit effect. The study has not measured typical city profit, optimal investment neighborhoods, a guaranteed 180-night total, realised monthly ADR, or the return on purchased property. Monthly tourism is a proxy for reservations; 330 nights of supply remains assumed. The official monthly dataset extracted here ends in 2024; a complete 2025–2026 monthly city series is not validated.')
-p('A matched sample needs size, capacity, furnishing, condition, neighborhood and available nights. The reconstructed14-property primary cohort uses an explicit central-label selection and reviewed identity decisions, but remains a convenience sample below the20-property target. Some leads are inaccessible, fees or addresses conflict and probable matches remain unresolved. The original21-record snapshot remains historical; four missing prices were recovered in separate new observations without modifying it. Provider revenue must be reconciled before fee subtraction. The broader secondary cohort is reported separately. Actual availability, signed rents, amenity adjustments and exact boundary geocoding remain unmeasured. Monthly price and reservations should be paired within the same segment and period; unrelated averages do not support a correlation analysis.')
-p('Utilities, cleaning, maintenance, insurance, property taxes and compliance require documented costs. Vacancy and arrears must be stress-tested. Data releases differ slightly and revisions must be retained. Owner time is excluded by design, but management effort remains a qualitative difference.')
-p('Final answer: short-term renting is a credible business opportunity in Bergamo, but the present evidence supports conditional competitiveness, not a general recommendation to convert homes or a proven city-wide profit advantage. This is an edited market-informed scenario study pending comparable-property and cost validation.')
+p('A matched sample needs size, capacity, furnishing, condition, neighborhood and available nights. The reconstructed 14-property primary cohort uses an explicit central-label selection and reviewed identity decisions, but remains a convenience sample below the 20-property target. Some leads are inaccessible, fees or addresses conflict and probable matches remain unresolved. The original 21-record snapshot remains historical; four missing prices were recovered in separate new observations without modifying it. Provider revenue must be reconciled before fee subtraction. The broader secondary cohort is reported separately. Actual availability, signed rents, amenity adjustments and exact boundary geocoding remain unmeasured. Monthly price and reservations should be paired within the same segment and period; unrelated averages do not support a correlation analysis.')
+p('Utilities, cleaning, maintenance, insurance, property taxes and compliance already have modelled amounts or allowances; these are not verified property-specific expenditures. Actual bills, applicable regulatory costs and exceptional repairs must be checked against those budgets. Long-term vacancy and payment continuity also need property-specific validation. Owner time is excluded by design; professional management, acquisition and financing are outside base operating cash. Incremental preparation is tested separately through five-year simple recovery rather than deducted from base operating cash. Data-release differences and revisions remain documented.')
+p('Final answer: tourism growth establishes a market opportunity, but the present model identifies a near break-even comparison of annual net cash income under its assumptions. Neither strategy has a demonstrated robust economic advantage. The evidence does not support a general recommendation to convert homes or establish comprehensive economic profit. A conclusive property-level decision requires verified realised prices and booked nights, a credible long-term rental alternative and a more complete assessment of operating costs, management effort and conversion expenditure.')
 page();h('References')
 p('Sources are placed at the end and cited by number in the text. Source checks and dataset retrieval took place during the project through 14 October 2026; not all pages were re-fetched for this editorial edition. Publication dates and coverage are distinguished. Asking-rent observations are snapshots, not a permanent live listing inventory.')
 src=[
@@ -273,10 +305,10 @@ src.append((str(43),'Assaeroporti. 2025 December traffic tables, January–Decem
 for num,label,url in src:
     refp=p('['+num+'] '+label);refp.paragraph_format.keep_with_next=True;x=p('');link=OxmlElement('w:hyperlink');link.set(qn('r:id'),x.part.relate_to(url,RT.HYPERLINK,is_external=True));rr=OxmlElement('w:r');rp=OxmlElement('w:rPr');sz=OxmlElement('w:sz');sz.set(qn('w:val'),'18');rp.append(sz);rr.append(rp);tt=OxmlElement('w:t');tt.text=url;rr.append(tt);link.append(rr);x._p.append(link)
 p('Reproducible analysis: https://github.com/pedramkj/bergamo-rental-strategy-analysis. The repository provides Python calculations, validation checks, data snapshots, the listing registry and a README. No personal documents or full copyrighted listing text are included.')
-p('Project inputs are retained in data/validated-monthly-analysis.json, data/validation.json and data/seasonal-booking-estimate.json. Financial and break-even calculations are in results/analysis.json; airport comparisons are in results/airport-comparison.json. The present model uses exactly 180 nights, replacing the earlier fractional 181.5-night illustration. No owner-time deduction is included. The eight charts are generated from those observations and explicit assumptions.')
+p('Project inputs are retained in data/validated-monthly-analysis.json, data/validation.json and data/seasonal-booking-estimate.json. Financial and break-even calculations are in results/analysis.json; airport comparisons are in results/airport-comparison.json. The present model uses exactly 180 nights, replacing the earlier fractional 181.5-night illustration. No owner-time deduction is included. The figures are generated from those observations and explicit assumptions.')
 page();h('Appendix A Rental registry audit')
 p('All 21 source records are retained. Prices below are parsed recorded values, not freshly verified executed rents. Missing means no usable price is saved. Contract group labels describe the earlier registry and do not certify eligibility for a city-centre average. Fees and study-area membership remain insufficiently documented for a pooled residential statistic. Source URLs and existing notes are preserved in data/listings.csv and results/listing-review.json.')
-table(['Listing ID','EUR/month','Recorded area','Registry group'],[[r['id'],'Missing' if r['parsed_monthly_eur'] is None else f"{r['parsed_monthly_eur']:,.0f}",r['recorded_area'] or 'Not recorded',r['recorded_group']] for r in listing_audit['records']])
+table(['Listing ID','EUR/month','Recorded area','Historical registry group'],[[r['id'],'Missing' if r['parsed_monthly_eur'] is None else f"{r['parsed_monthly_eur']:,.0f}",r['recorded_area'] or 'Not recorded',r['recorded_group']] for r in listing_audit['records']])
 p('Arithmetic mean = sum of the recorded numeric rents / number of numeric rents = EUR 17,240 / 17 = EUR 1,014.12. The missing four records are not counted as zero. The sample standard deviation uses n minus one. These statistics describe the heterogeneous recorded values and cannot verify a mean of 21 eligible long-term city-centre offers. The intended approximately EUR 900 arithmetic mean remains unverified.')
 
 rental_appendix(p,h,sub,page,table)
@@ -293,10 +325,10 @@ for code,label,url in [
 p('All individual advertisement URLs and short factual verification notes are preserved in source-register.csv. Observations may come from indexed pages, not direct availability confirmation. Provider terms and source rights apply. The independent market indicators use different areas, periods and surface definitions and do not enter the primary arithmetic mean.')
 
 for b in list(d.element.iter(qn('w:pBdr'))):b.getparent().remove(b)
-d.core_properties.title='More Tourists, More Profit?'
+d.core_properties.title=TITLE
 d.core_properties.subject='A Data-Driven Business Case Study on Rental Profitability in Bergamo'
 d.core_properties.author='Pedram Kojouri'
 d.core_properties.last_modified_by='Pedram Kojouri'
-d.save(out/'Bergamo_Rental_Strategies_Complete_EN_v03.docx')
-print((out/'Bergamo_Rental_Strategies_Complete_EN_v03.docx').resolve())
+d.save(out/'Bergamo_Rental_Strategies_Generated_Draft.docx')
+print((out/'Bergamo_Rental_Strategies_Generated_Draft.docx').resolve())
 
